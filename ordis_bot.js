@@ -15,7 +15,7 @@ const prefix = "//"
 
 bot.on('ready', () => {
     console.log("je suis connecté")
-    bot.user.setActivity("TEST", { type: "WATCHING" })
+    bot.user.setActivity(prefix + "info", { type: "WATCHING" })
 })
 
 
