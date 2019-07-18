@@ -71,7 +71,7 @@ bot.on('message', message => {
 })
 
 bot.on('raw', event => {
-    //var eventName = event.t
+    var eventName = event.t
     if (eventName == 'MESSAGE_REACTION_ADD') {
         if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
             return
