@@ -7,7 +7,6 @@ module.exports.liste = function (message) {
             console.log("\n\n")
             console.log(response)
             var baro = response.data
-            //var active = false
             if (baro.active) {
                 let embed = new Discord.RichEmbed()
                     .setTitle("Void trader (" + baro.character + ")")
@@ -40,9 +39,16 @@ module.exports.liste = function (message) {
                     .addField(baro.inventory[23].item, baro.inventory[23].ducats + " Ducats | " + baro.inventory[23].credits + " Credits", true)
                     .addField(baro.inventory[24].item, baro.inventory[24].ducats + " Ducats | " + baro.inventory[24].credits + " Credits", true)
                     .setFooter("S'en va dans " + baro.endString)
+                    .setTimestamp(baro.expiry)
                 message.channel.send(embed)
             }else{
-                message.channel.send("Commande incomplète\n@fabien219200#2000 VIENS FINIR TON CODE (Tu peux copier-coller ça pour moi stp ? Merci :grin:)")
+                let embed = new Discord.RichEmbed()
+                    .setTitle("Void trader (" + baro.character + ")")
+                    .setURL("https://warframe.fandom.com/wiki/Baro_Ki%27Teer")
+                    .setDescription("Baro arrive sur : **" + baro.location + "**")
+                    .setFooter("Arrive dans " + baro.startString)
+                    .setTimestamp(baro.activation)
+                message.channel.send(embed)
             }
         }).catch(function(err) {
             message.channel.send("Une erreur est survenue, merci de contacter fabien219200 pour resoudre le soucis ;)\n" + err)
