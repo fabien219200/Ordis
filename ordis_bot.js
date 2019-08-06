@@ -11,6 +11,7 @@ const fissures = require('./ordis_modules/fissures')
 const nightwaves = require('./ordis_modules/nightwaves')
 const sortie = require('./ordis_modules/sortie')
 const voidTrader = require('./ordis_modules/voidTrader')
+const invasions = require('./ordis_modules/invasions')
 
 const prefix = "//"
 
@@ -65,6 +66,11 @@ bot.on('message', message => {
     if(message.content.startsWith(prefix + "baro")){
         voidTrader.liste(message)
     }
+    
+    if(message.content.startsWith(prefix + "invasions")){
+        invasions.liste(message)
+    }
+
 
     if (message.content.startsWith(prefix + "drops")) { //TODO 
         axios.get("https://api.warframestat.us/drops/search/survival")
