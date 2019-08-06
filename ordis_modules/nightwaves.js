@@ -18,11 +18,10 @@ module.exports.liste = function(message) {
                 .setFooter("Actes hebdomadaires expirent ")
                 .setTimestamp(response.data.activeChallenges[4].expiry)
             message.channel.send(embed)
-            console.log(message.guild.members.find(member => member.displayName == "BOT TEST"))
-        }).catch(function () {
+        }).catch(function(err) {
             let embed = new Discord.RichEmbed()
                 .setTitle("Une erreur est survenue !")
-                .setDescription("Contactez un " + message.guild.roles.find(role => role.name == "Developper").name + " pour corriger ce problème.")
+                .setDescription("Contactez un " + message.guild.roles.find(role => role.name == "Developper").name + " pour corriger ce problème.\n" + err)
             message.channel.send(embed)
         })
 }
