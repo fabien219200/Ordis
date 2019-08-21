@@ -18,10 +18,7 @@ module.exports.liste = function(message) {
                 .setFooter("Actes hebdomadaires expirent ")
                 .setTimestamp(response.data.activeChallenges[4].expiry)
             message.channel.send(embed)
-        }).catch(function(err) {
-            let embed = new Discord.RichEmbed()
-                .setTitle("Une erreur est survenue !")
-                .setDescription("Contactez un " + message.guild.roles.find(role => role.name == "Developper").name + " pour corriger ce problème.\n" + err)
-            message.channel.send(embed)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
