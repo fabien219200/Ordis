@@ -17,8 +17,8 @@ module.exports.question = function (message) {
                         .then(function () {
                             message.react("❌")
                         }).catch(function () {
-                            message.channel.send("Une erreur est survenue. Merci de contacter un @Developpeur pour patcher ce bug.")
-                        })
+                    message.channel.send("Syntaxe error")
+                })
                 }).catch(function () {
                     message.channel.send("Syntaxe error")
                 })
