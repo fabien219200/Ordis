@@ -11,33 +11,21 @@ module.exports.platinum = function (message) {
     var returnValues
 
     axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
-        .then((response2) => {
-            returnValues = prixMin(response2)
-        }).catch(function (err) {
-            console.log(err)
-        })
-        .then(() => {
-            axios.get('https://api.warframe.market/v1/items/' + stringWfMarket + '/statistics')
-                .then((response) => {
-                    console.log("\n\n")
-                    console.log(response)
-                    var res = response.data.payload.statistics_closed["48hours"]
-                    var taille = res.length
-                    var prix_moyen = res[taille - 1].avg_price
-                    console.log(returnValues)
-                    let embed = new Discord.RichEmbed()
-                        .setTitle("Prix (warframe.market)")
-                        .setURL("https://warframe.market/items/" + stringWfMarket)
-                        .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
-                        .setColor('#0101F2')
-                        .addField("Prix de vente minimum de " + string, ":white_small_square: Online in game : " + returnValues[0] + " (``/w " + returnValues[3] + "``)\n:white_small_square: Offline : " + returnValues[1] + " (``/w " + returnValues[4] + "``)")
-                        .addBlankField()
-                        .addField("Prix d'achat maximum de " + string, ":white_small_square: Online in game : " + returnValues[2] + " (``/w " + returnValues[5] + "``)")
-                    message.channel.send(embed)
-                    //TODO embeds
-                }).catch(function () {
-                    message.channel.send("L'item est introuvable")
-                })
+        .then((response) => {
+            returnValues = prixMin(response)
+            console.log("\n\n")
+            console.log(response)
+            let embed = new Discord.RichEmbed()
+                .setTitle("Prix (warframe.market)")
+                .setURL("https://warframe.market/items/" + stringWfMarket)
+                .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
+                .setColor('#0101F2')
+                .addField("Prix de vente minimum de " + string, ":white_small_square: Online in game : " + returnValues[0] + " (``/w " + returnValues[3] + "``)\n:white_small_square: Offline : " + returnValues[1] + " (``/w " + returnValues[4] + "``)")
+                .addBlankField()
+                .addField("Prix d'achat maximum de " + string, ":white_small_square: Online in game : " + returnValues[2] + " (``/w " + returnValues[5] + "``)")
+            message.channel.send(embed)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
 
