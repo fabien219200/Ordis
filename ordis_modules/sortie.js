@@ -16,10 +16,7 @@ module.exports.liste = function (message) {
                 .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/1/15/Sortie_b.png/revision/latest?cb=20151217134250")
                 .setFooter("Expire dans " + sortie.eta)
             message.channel.send(embed)
-        }).catch(function () {
-            let embed = new Discord.RichEmbed()
-                .setTitle("Une erreur est survenue !")
-                .setDescription("Contactez un " + message.guild.roles.find("name", "Developper").name + " pour corriger ce problème.")
-            message.channel.send(embed)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
