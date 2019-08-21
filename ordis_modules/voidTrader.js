@@ -50,8 +50,7 @@ module.exports.liste = function (message) {
                     .setTimestamp(baro.activation)
                 message.channel.send(embed)
             }
-        }).catch(function(err) {
-            message.channel.send("Une erreur est survenue, merci de contacter fabien219200 pour resoudre le soucis ;)\n" + err)
-            console.log(err)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
