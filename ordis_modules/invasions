@@ -141,7 +141,7 @@ module.exports.liste = function (message) {
                 .setURL("https://warframe.fandom.com/wiki/Invasion")
                 .setDescription(msg)
             message.channel.send(embed)
-        }).catch(function (err) {
-            console.log(err)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
