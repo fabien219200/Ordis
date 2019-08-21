@@ -27,10 +27,7 @@ module.exports.liste = function (message) {
                 .setDescription(msg)
                 .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/5/57/VoidTearIcon_b.png/revision/latest?cb=20160713085454")
             message.channel.send(embed)
-        }).catch(function () {
-            let embed = new Discord.RichEmbed()
-                .setTitle("Une erreur est survenue !")
-                .setDescription("Contactez un " + message.guild.roles.find("name", "Developper").name + " pour corriger ce problème.")
-            message.channel.send(embed)
+        }).catch(function (err){
+            message.channel.send("" + err)
         })
 }
