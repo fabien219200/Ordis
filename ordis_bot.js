@@ -188,6 +188,17 @@ bot.on('messageReactionAdd', (reaction, user) => {
                 }
             }
             break;
+            
+        case "SkylordsReborn":
+            var roleName = "Skylords Reborn"
+            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+            if (role) {
+                var member = reaction.message.guild.members.find(member => member.id == user.id)
+                if (member) {
+                    member.addRole(role.id)
+                }
+            }
+            break;
     }
 })
 
@@ -262,6 +273,17 @@ bot.on('messageReactionRemove', (reaction, user) => {
 
         case "Dauntless":
             var roleName = "Dauntless"
+            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+            if (role) {
+                var member = reaction.message.guild.members.find(member => member.id == user.id)
+                if (member) {
+                    member.removeRole(role.id)
+                }
+            }
+            break;
+            
+        case "SkylordsReborn":
+            var roleName = "Skylords Reborn"
             var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
             if (role) {
                 var member = reaction.message.guild.members.find(member => member.id == user.id)
