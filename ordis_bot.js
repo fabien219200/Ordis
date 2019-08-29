@@ -111,187 +111,24 @@ bot.on('raw', event => {
 })
 
 bot.on('messageReactionAdd', (reaction, user) => {
-    switch (reaction.emoji.name) {
-        case "TheDivision":
-            var roleName = "The Division 2"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "RocketLeague":
-            var roleName = "Rocket League"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "Warframe":
-            var roleName = "Warframe"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "Trine":
-            var roleName = "Trine"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "LoL":
-            var roleName = "League of Legends"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "Satisfactory":
-            var roleName = "Satisfactory"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-
-        case "Dauntless":
-            var roleName = "Dauntless"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
-            
-        case "SkylordsReborn":
-            var roleName = "Skylords Reborn"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.addRole(role.id)
-                }
-            }
-            break;
+    var roleName = reaction.emoji.name
+    var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+    if (role) {
+        var member = reaction.message.guild.members.find(member => member.id == user.id)
+        if (member) {
+            member.addRole(role.id)
+        }
     }
 })
 
 bot.on('messageReactionRemove', (reaction, user) => {
-    //console.log(reaction)
-    switch (reaction.emoji.name) {
-        case "TheDivision":
-            var roleName = "The Division 2"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "RocketLeague":
-            var roleName = "Rocket League"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "Warframe":
-            var roleName = "Warframe"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "Trine":
-            var roleName = "Trine"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "LoL":
-            var roleName = "League of Legends"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "Satisfactory":
-            var roleName = "Satisfactory"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-
-        case "Dauntless":
-            var roleName = "Dauntless"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
-            
-        case "SkylordsReborn":
-            var roleName = "Skylords Reborn"
-            var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-            if (role) {
-                var member = reaction.message.guild.members.find(member => member.id == user.id)
-                if (member) {
-                    member.removeRole(role.id)
-                }
-            }
-            break;
+    var roleName = reaction.emoji.name
+    var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+    if (role) {
+        var member = reaction.message.guild.members.find(member => member.id == user.id)
+        if (member) {
+            member.removeRole(role.id)
+        }
     }
 })
 
