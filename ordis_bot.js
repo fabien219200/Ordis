@@ -84,28 +84,32 @@ bot.on('message', message => {
 bot.on('raw', event => {
     var eventName = event.t
     if (eventName == 'MESSAGE_REACTION_ADD') {
-        if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
-            return
-        } else {
-            bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
-                .then(msg => {
-                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-                    var user = bot.users.get(event.d.user_id)
-                    bot.emit('messageReactionAdd', msgReaction, user)
-                })
+        if (event.d.channel_id === '594550466109636609') {
+            if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
+                return
+            } else {
+                bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
+                    .then(msg => {
+                        var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+                        var user = bot.users.get(event.d.user_id)
+                        bot.emit('messageReactionAdd', msgReaction, user)
+                    })
+            }
         }
     }
 
     if (eventName == 'MESSAGE_REACTION_REMOVE') {
-        if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
-            return
-        } else {
-            bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
-                .then(msg => {
-                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-                    var user = bot.users.get(event.d.user_id)
-                    bot.emit('messageReactionRemove', msgReaction, user)
-                })
+        if (event.d.channel_id === '594550466109636609') {
+            if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
+                return
+            } else {
+                bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
+                    .then(msg => {
+                        var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+                        var user = bot.users.get(event.d.user_id)
+                        bot.emit('messageReactionRemove', msgReaction, user)
+                    })
+            }
         }
     }
 })
