@@ -12,6 +12,8 @@ const nightwaves = require('./ordis_modules/nightwaves')
 const sortie = require('./ordis_modules/sortie')
 const voidTrader = require('./ordis_modules/voidTrader')
 const invasions = require('./ordis_modules/invasions')
+const search = require('./ordis_modules/search')
+
 
 const prefix = "//"
 
