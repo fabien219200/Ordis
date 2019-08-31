@@ -72,13 +72,9 @@ bot.on('message', message => {
     if(message.content.startsWith(prefix + "invasions")){
         invasions.liste(message)
     }
-
-
-    if (message.content.startsWith(prefix + "drops")) { //TODO 
-        axios.get("https://api.warframestat.us/drops/search/survival")
-            .then((response) => {
-                console.log(response.data[1000])
-            })
+    
+    if (message.content.startsWith(prefix + "search")) {
+        search.infos(message)
     }
 
 })
