@@ -146,10 +146,12 @@ module.exports.infos = function (message) {
                             }
                         }).catch(function (err) {
                             message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
+                            console.log(err)
                         })
                 }
             }).catch(function (err) {
                 message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
+                console.log(err)
             })
     })
 }
