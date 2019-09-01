@@ -62,6 +62,7 @@ module.exports.infos = function (message) {
                                 name = data.name
                                 type = data.type
                                 image = data.wikiaThumbnail
+                                recipe = getRecipe(data.components)
                                 var embed = new Discord.RichEmbed()
                                     .setTitle("Données de " + name)
                                     .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
@@ -73,11 +74,12 @@ module.exports.infos = function (message) {
                                     .addField("Description", desc)
                                     //.addField("Date de sortie", released)
                                     .addField("Rang de maîtrise nécessaire", mastery)
+                                    .addField("Recette pour crafter : *" + name + "*", recipe)
                                 message.channel.send(embed)
                             }
                         }
                     }
-                    //recipie
+                    //recipe
                 } else {
                     axios.get("https://api.warframestat.us/warframes/search/" + query)
                         .then((response2) => {
@@ -142,9 +144,9 @@ module.exports.infos = function (message) {
                             } else {
                                 message.channel.send("La recherche n'a donnée aucun résultat !\n")
                             }
-                        })/*.catch(function (err) {
+                        }).catch(function (err) {
                             message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
-                        })*/
+                        })
                 }
             }).catch(function (err) {
                 message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
@@ -190,5 +192,18 @@ function modifyDate(dateAnglais) {
             }
         }
         return dateFrancais
+    }
+}
+
+function getRecipe(components) {
+    if (components == undefined) {
+        return "**Pas de recette pour cette arme !**"
+    } else {
+        var recipe = ""
+        for (var i = 0; i < components.length; i++) {
+            console.log(components[i])
+            recipe = recipe + ":white_small_square:" + components[i].name + " : " + components[i].itemCount + "\n"
+        }
+        return recipe
     }
 }
