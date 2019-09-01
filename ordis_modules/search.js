@@ -45,7 +45,7 @@ module.exports.infos = function (message) {
                                     .setTitle("Données de " + name)
                                     .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                     .setColor('#0101F2')
-                                    .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content).split(" ").join("_"))
+                                    .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content, "").split(" ").join("_"))
                                     .setThumbnail(image)
                                     .addField("Categorie", category)
                                     .addField("Type", type)
@@ -67,7 +67,7 @@ module.exports.infos = function (message) {
                                     .setTitle("Données de " + name)
                                     .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                     .setColor('#0101F2')
-                                    .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content).split(" ").join("_"))
+                                    .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content, "").split(" ").join("_"))
                                     .setThumbnail(image)
                                     .addField("Categorie", category)
                                     .addField("Type", type)
@@ -108,7 +108,7 @@ module.exports.infos = function (message) {
                                                 .setTitle("Données de " + name)
                                                 .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                                 .setColor('#0101F2')
-                                                .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content).split(" ").join("_"))
+                                                .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content, "").split(" ").join("_"))
                                                 .setThumbnail(image)
                                                 .addField("Categorie", category)
                                                 .addField("Type", type)
@@ -129,7 +129,7 @@ module.exports.infos = function (message) {
                                                 .setTitle("Données de " + name)
                                                 .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                                 .setColor('#0101F2')
-                                                .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content).split(" ").join("_"))
+                                                .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(message.content, "").split(" ").join("_"))
                                                 .setThumbnail(image)
                                                 .addField("Categorie", category)
                                                 .addField("Type", type)
@@ -158,13 +158,11 @@ module.exports.infos = function (message) {
 
 function relicsFunction(Relics, message) {
     var availableRelics = ["", ""]
-    console.log(fonctions.majuscule(message))
     for (var j = 0; j < Relics.length; j++) {
-        if (Relics[j].Name == fonctions.majuscule(message)) {
+        if (Relics[j].Name == fonctions.majuscule(message, "")) {
             console.log("\n\n")
             var relicsObject = Relics[j]
-            //availableRelics[1] = relicsObject.EstimatedVaultDate
-            console.log(Relics)
+            console.log(relicsObject)
             for (var k = 0; k < relicsObject.Components.length - 1; k++) {
                 componentName = relicsObject.Components[k].Name
                 for (var l = 0; l < relicsObject.Components[k].Relics.length; l++) {
