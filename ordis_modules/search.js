@@ -163,7 +163,7 @@ function relicsFunction(Relics, message) {
             console.log("\n\n")
             var relicsObject = Relics[j]
             //availableRelics[1] = relicsObject.EstimatedVaultDate
-            console.log(relicsObject)
+            console.log(Relics)
             for (var k = 0; k < relicsObject.Components.length - 1; k++) {
                 componentName = relicsObject.Components[k].Name
                 for (var l = 0; l < relicsObject.Components[k].Relics.length; l++) {
