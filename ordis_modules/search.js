@@ -16,7 +16,7 @@ module.exports.infos = function (message) {
             var Relics = JSON.parse(jsonData).data
         }
         //console.log(Relics)
-
+        
         axios.get("https://api.warframestat.us/weapons/search/" + query)
             .then((response) => {
                 if (response.data.length != 0) {
@@ -158,6 +158,7 @@ module.exports.infos = function (message) {
 
 function relicsFunction(Relics, message) {
     var availableRelics = ["", ""]
+    console.log(fonctions.majuscule(message))
     for (var j = 0; j < Relics.length; j++) {
         if (Relics[j].Name == fonctions.majuscule(message)) {
             console.log("\n\n")
