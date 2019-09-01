@@ -140,7 +140,7 @@ bot.on('guildMemberAdd', (member) => {
 })
 
 bot.on("guildMemberRemove", member => {
-    member.guild.channels.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un valeureux Tenno !")
+    member.guild.channels.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
 })
 
 bot.login(process.env.BOT_TOKEN)
