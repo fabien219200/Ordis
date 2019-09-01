@@ -15,7 +15,7 @@ module.exports.infos = function (message) {
         } else {
             var Relics = JSON.parse(jsonData).data
         }
-        console.log(Relics)
+        //console.log(Relics)
 
         axios.get("https://api.warframestat.us/weapons/search/" + query)
             .then((response) => {
@@ -24,7 +24,7 @@ module.exports.infos = function (message) {
                         if (query.toLowerCase() === response.data[i].name.toLowerCase()) {
                             console.log("\n\n")
                             data = response.data[i]
-                            console.log(data)
+                            //console.log(data)
                             if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
                                 availableRelics = relicsFunction(Relics, message.content)
                                 if (availableRelics[0] != "") {
@@ -79,7 +79,6 @@ module.exports.infos = function (message) {
                             }
                         }
                     }
-                    //recipe
                 } else {
                     axios.get("https://api.warframestat.us/warframes/search/" + query)
                         .then((response2) => {
@@ -163,7 +162,7 @@ function relicsFunction(Relics, message) {
         if (Relics[j].Name == fonctions.majuscule(message)) {
             console.log("\n\n")
             var relicsObject = Relics[j]
-            availableRelics[1] = relicsObject.EstimatedVaultDate
+            //availableRelics[1] = relicsObject.EstimatedVaultDate
             console.log(relicsObject)
             for (var k = 0; k < relicsObject.Components.length - 1; k++) {
                 componentName = relicsObject.Components[k].Name
