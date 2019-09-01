@@ -15,7 +15,7 @@ module.exports.infos = function (message) {
         } else {
             var Relics = JSON.parse(jsonData).data
         }
-        //console.log(relics)
+        console.log(Relics)
 
         axios.get("https://api.warframestat.us/weapons/search/" + query)
             .then((response) => {
