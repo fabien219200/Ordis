@@ -160,7 +160,7 @@ function relicsFunction(Relics, message) {
     for (var j = 0; j < Relics.length; j++) {
         if (Relics[j].Name == fonctions.majuscule(message)) {
             console.log("\n\n")
-            relicsObject = Relics[j]
+            var relicsObject = Relics[j]
             availableRelics[1] = relicsObject.EstimatedVaultDate
             console.log(relicsObject)
             for (var k = 0; k < relicsObject.Components.length - 1; k++) {
