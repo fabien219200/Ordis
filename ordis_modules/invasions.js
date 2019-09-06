@@ -43,7 +43,7 @@ module.exports.liste = function (message) {
                                 Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
-                            case "Europe":
+                            case "Europa":
                                 Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
@@ -97,7 +97,7 @@ module.exports.liste = function (message) {
                                 Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
-                            case "Europe":
+                            case "Europa":
                                 Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
