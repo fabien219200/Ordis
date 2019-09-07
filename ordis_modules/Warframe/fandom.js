@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const fonctions = require('../ordis_bot')
+const fonctions = require('../../ordis')
 
 module.exports.wiki = function (message) {
     var msg = ""
