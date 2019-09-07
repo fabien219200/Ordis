@@ -115,10 +115,14 @@ bot.on('raw', event => {
 bot.on('messageReactionAdd', (reaction, user) => {
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+    var role_membre = reaction.message.guild.roles.find(role => role.name.toLowerCase() == "developper")
     if (role) {
         var member = reaction.message.guild.members.find(member => member.id == user.id)
         if (member) {
             member.addRole(role.id)
+            if (!member.roles.find(role => role.name.toLowerCase() == "membres")) {
+                member.addRole(role_membre.id)
+            }
         }
     }
 })
@@ -132,11 +136,6 @@ bot.on('messageReactionRemove', (reaction, user) => {
             member.removeRole(role.id)
         }
     }
-})
-
-bot.on('guildMemberAdd', (member) => {
-    var role = member.guild.roles.find(role => role.name.toLowerCase() == "membres")
-    member.addRole(role.id)
 })
 
 bot.on("guildMemberRemove", member => {
