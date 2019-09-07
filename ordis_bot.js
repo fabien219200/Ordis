@@ -20,7 +20,7 @@ const prefixDiscord = "!"
 
 bot.on('ready', () => {
     console.log("je suis connecté")
-    bot.user.setActivity(prefixWarframe + "info", { type: "WATCHING" })
+    bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
 })
 
 
