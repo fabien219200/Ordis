@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const axios = require('axios')
 const fs = require('fs')
-const fonctions = require('../../ordis')
+const fonctions = require('../../ordis_bot')
 
 
 module.exports.infos = function (message) {
