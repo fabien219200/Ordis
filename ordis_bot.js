@@ -115,7 +115,7 @@ bot.on('raw', event => {
 bot.on('messageReactionAdd', (reaction, user) => {
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-    var role_membre = reaction.message.guild.roles.find(role => role.name.toLowerCase() == "developper")
+    var role_membre = reaction.message.guild.roles.find(role => role.name.toLowerCase() == "membres")
     if (role) {
         var member = reaction.message.guild.members.find(member => member.id == user.id)
         if (member) {
