@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const axios = require('axios')
-const fonctions = require('../../ordis')
+const fonctions = require('../../ordis_bot')
 
 module.exports.platinum = function (message) {
     var string = fonctions.majuscule(message.content, "")
