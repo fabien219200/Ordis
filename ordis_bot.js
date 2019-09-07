@@ -3,7 +3,7 @@ const bot = new Discord.Client()
 const axios = require('axios')
 const fandom = require('./ordis_modules/Warframe/fandom')
 const infoBot = require('./ordis_modules/Discord/infoBot')
-const sondage = require('./ordis_modules/Warframe/sondage')
+const sondage = require('./ordis_modules/Discord/sondage')
 const clear = require('./ordis_modules/Discord/clear')
 const cetus = require('./ordis_modules/Warframe/cetus')
 const prix = require('./ordis_modules/Warframe/prix')
@@ -15,11 +15,12 @@ const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 
 
-const prefix = "//"
+const prefixWarframe = "/"
+const prefixDiscord = "!"
 
 bot.on('ready', () => {
     console.log("je suis connecté")
-    bot.user.setActivity(prefix + "info", { type: "WATCHING" })
+    bot.user.setActivity(prefixWarframe + "info", { type: "WATCHING" })
 })
 
 
@@ -29,51 +30,51 @@ bot.on('message', message => {
         message.reply("Salut cher ami")
     }
 
-    if (message.content.startsWith(prefix + "info")) {
+    if (message.content.startsWith(prefixDiscord + "info")) {
         infoBot.info(message)
     }
 
-    if (message.content.startsWith(prefix + "sondage")) { //TODO resoudre pb .then
+    if (message.content.startsWith(prefixDiscord + "sondage")) { //TODO resoudre pb .then
         sondage.question(message)
     }
 
-    if (message.content.startsWith(prefix + "wiki")) {
+    if (message.content.startsWith(prefixWarframe + "wiki")) {
         fandom.wiki(message)
     }
 
-    if (message.content.startsWith(prefix + "clear")) {
+    if (message.content.startsWith(prefixDiscord + "clear")) {
         clear.suppr(message)
     }
 
-    if (message.content.startsWith(prefix + "cetus")) {
+    if (message.content.startsWith(prefixWarframe + "cetus")) {
         cetus.status(message)
     }
 
-    if (message.content.startsWith(prefix + "prix")) { //TODO finir
+    if (message.content.startsWith(prefixWarframe + "prix")) { //TODO finir
         prix.platinum(message)
     }
 
-    if (message.content.startsWith(prefix + "fissures")) {
+    if (message.content.startsWith(prefixWarframe + "fissures")) {
         fissures.liste(message)
     }
 
-    if (message.content.startsWith(prefix + "nightwaves")) {
+    if (message.content.startsWith(prefixWarframe + "nightwaves")) {
         nightwaves.liste(message)
     }
 
-    if (message.content.startsWith(prefix + "sortie")) {
+    if (message.content.startsWith(prefixWarframe + "sortie")) {
         sortie.liste(message)
     }
     
-    if(message.content.startsWith(prefix + "baro")){
+    if(message.content.startsWith(prefixWarframe + "baro")){
         voidTrader.liste(message)
     }
     
-    if(message.content.startsWith(prefix + "invasions")){
+    if(message.content.startsWith(prefixWarframe + "invasions")){
         invasions.liste(message)
     }
     
-    if (message.content.startsWith(prefix + "search")) {
+    if (message.content.startsWith(prefixWarframe + "search")) {
         search.infos(message)
     }
 
