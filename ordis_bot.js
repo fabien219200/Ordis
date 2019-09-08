@@ -13,6 +13,8 @@ const sortie = require('./ordis_modules/Warframe/sortie')
 const voidTrader = require('./ordis_modules/Warframe/voidTrader')
 const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
+const userInfo = require('./ordis_modules/Discord/userInfo')
+
 
 
 const prefixWarframe = "/"
@@ -78,6 +80,11 @@ bot.on('message', message => {
         search.infos(message)
     }
 
+    if (message.content.startsWith(prefixDiscord + "user")) {
+    userInfo.info(message)
+    }
+
+    
 })
 
 bot.on('raw', event => {
