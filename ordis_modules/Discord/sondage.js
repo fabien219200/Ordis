@@ -16,9 +16,14 @@ module.exports.question = function (message) {
                     message.react("✅")
                         .then(function () {
                             message.react("❌")
-                        }).catch(function () {
-                    message.channel.send("Syntaxe error")
-                })
+                                .then(function () {
+                                    message.pin()
+                                }).catch(function (err) {
+                                    message.channel.send("" + err)
+                                })
+                        }).catch(function (err) {
+                            message.channel.send("" + err)
+                        })
                 }).catch(function () {
                     message.channel.send("Syntaxe error")
                 })
