@@ -15,7 +15,7 @@ module.exports.question = async function (message) {
                 }
             }
         } else {
-            var msg = message.content.split(" ").slice(1)
+            var msg = message.content.split(" ").slice(1).join(" ")
             var desc = "Repondre avec :white_check_mark: ou :x:"
         }
 
