@@ -2,8 +2,8 @@ const Discord = require('discord.js')
 const fonctions = require('../../ordis_bot')
 
 module.exports.wiki = function (message) {
-    var msg = ""
-    msg = fonctions.majuscule(message.content, msg)
+var msg = message.content.split(" ").slice(1).join(" ")
+    msg = fonctions.majuscule(msg)
     msg2 = msg.split(" ").join("_")
     let embed = new Discord.RichEmbed()
         .setTitle("**__Wiki__**")
