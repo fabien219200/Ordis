@@ -3,7 +3,8 @@ const axios = require('axios')
 const fonctions = require('../../ordis_bot')
 
 module.exports.platinum = function (message) {
-    var string = fonctions.majuscule(message.content, "")
+    var string = message.content.split(" ").slice(1).join(" ")
+    string = fonctions.majuscule(string)
     var wiki = string.split(" ").join("_")
     stringWfNexus = string.trim()
     stringWfMarket = wiki.toLowerCase().trim()
