@@ -26,7 +26,7 @@ module.exports.infos = function (message) {
                             data = response.data[i]
                             //console.log(data)
                             if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
-                                availableRelics = relicsFunction(Relics, message.content)
+                                availableRelics = relicsFunction(Relics, query)
                                 if (availableRelics[0] != "") {
                                     estimatedVault = modifyDate(availableRelics[1])
                                     var inRelics = "**Obtenable dans les reliques : **\n" + availableRelics[0]
@@ -89,7 +89,7 @@ module.exports.infos = function (message) {
                                         data = response2.data[i]
                                         console.log(data)
                                         if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
-                                            availableRelics = relicsFunction(Relics, message.content)
+                                            availableRelics = relicsFunction(Relics, query)
                                             if (availableRelics[0] != "") {
                                                 estimatedVault = modifyDate(availableRelics[1])
                                                 var inRelics = "**Obtenable dans les reliques : **\n" + availableRelics[0]
@@ -159,9 +159,10 @@ module.exports.infos = function (message) {
 function relicsFunction(Relics, message) {
     var availableRelics = ["", ""]
     for (var j = 0; j < Relics.length; j++) {
-        if (Relics[j].Name == fonctions.majuscule(message, "")) {
+        if (Relics[j].Name.toLowerCase() == message.toLowerCase()) {
             console.log("\n\n")
             var relicsObject = Relics[j]
+            availableRelics[1] = relicsObject.EstimatedVaultDate
             console.log(relicsObject)
             for (var k = 0; k < relicsObject.Components.length - 1; k++) {
                 componentName = relicsObject.Components[k].Name
