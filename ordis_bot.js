@@ -153,22 +153,14 @@ bot.on("guildMemberRemove", member => {
 bot.login(process.env.BOT_TOKEN)
 
 
-module.exports.majuscule = function(originalMessage, msg) {
-    var array = originalMessage.split(" ")
-    for (i = 1; i < array.length; i++) {
-        if (array[i] != "") {
-            array[i] = array[i].toLowerCase()
-            var char = array[i].split("")
-            char[0] = char[0].toUpperCase()
-            for (j = 0; j < char.length; j++) {
-                msg = msg + char[j]
-                if (i != array.length - 1) {
-                    if (j == char.length - 1) {
-                        msg = msg + " "
-                    }
-                }
-            }
-        }
+module.exports.majuscule = function (message) {
+    var words = message.split(" ")
+    for (i = 0; i < words.length; i++) {
+        var letter = words[i].split("")
+        letter[0] = letter[0].toUpperCase()
+        words[i] = letter.join("")
     }
+    var msg = words.join(" ")
+    console.log(msg)
     return msg
 }
