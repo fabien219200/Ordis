@@ -304,8 +304,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo Z4"
                         }
                     ]
                 },
@@ -372,6 +377,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Lith C4"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi T3"
                         }
                     ]
                 },
@@ -522,8 +532,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith K3"
                         }
                     ]
                 },
@@ -643,8 +658,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
                         }
                     ]
                 },
@@ -706,6 +726,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo Z3"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso E3"
                         }
                     ]
                 },
@@ -820,8 +845,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -891,8 +921,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith W1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
                         }
                     ]
                 },
@@ -954,6 +989,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Axi L5"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo T2"
                         }
                     ]
                 },
@@ -1032,7 +1072,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
                         },
                         {
@@ -1044,6 +1084,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo R2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
                         }
                     ]
                 },
@@ -1093,13 +1138,18 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith K2"
                         },
                         {
                             "Rarity": "Common",
                             "Vaulted": true,
                             "Name": "Axi N6"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith S8"
                         }
                     ]
                 },
@@ -1215,7 +1265,7 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith K2"
                         },
                         {
@@ -1227,6 +1277,11 @@
                             "Rarity": "Uncommon",
                             "Vaulted": true,
                             "Name": "Axi N6"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
                         }
                     ]
                 },
@@ -1280,8 +1335,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith S8"
                         }
                     ]
                 },
@@ -1336,13 +1396,23 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso D4"
                         }
                     ]
                 },
@@ -1917,8 +1987,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
                         }
                     ]
                 },
@@ -1958,8 +2033,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi T2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi G3"
                         }
                     ]
                 },
@@ -2006,6 +2086,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Axi L5"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi T3"
                         }
                     ]
                 },
@@ -2067,6 +2152,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo M2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo Z4"
                         }
                     ]
                 },
@@ -2350,6 +2440,10 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo M2"
+                        },{
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo T2"
                         }
                     ]
                 },
@@ -2494,8 +2588,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
                         }
                     ]
                 },
@@ -2550,7 +2649,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
                         },
                         {
@@ -2560,8 +2659,18 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso D4"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi G3"
                         }
                     ]
                 },
@@ -2621,13 +2730,18 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi R2"
                         },
                         {
                             "Rarity": "Common",
                             "Vaulted": true,
                             "Name": "Axi N6"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
                         }
                     ]
                 },
@@ -6958,10 +7072,10 @@
             ]
         },
         {
-            "Vaulted": false,
+            "Vaulted": true,
             "Name": "Kogake Prime",
-            "EstimatedVaultedDate": "2019 10 10",
-            "VaultedDate": "n/a",
+            "EstimatedVaultedDate": "2019 10 01",
+            "VaultedDate": "2019 10 01",
             "ReleaseDate": "2017 12 12",
             "Components": [
                 {
@@ -6985,12 +7099,12 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi T2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith L1"
                         }
                     ]
@@ -7021,7 +7135,7 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi P1"
                         }
                     ]
@@ -7047,7 +7161,7 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith K2"
                         }
                     ]
@@ -7060,10 +7174,10 @@
             ]
         },
         {
-            "Vaulted": false,
+            "Vaulted": true,
             "Name": "Akbolto Prime",
-            "EstimatedVaultedDate": "2019 10 10",
-            "VaultedDate": "n/a",
+            "EstimatedVaultedDate": "2019 10 01",
+            "VaultedDate": "2019 10 01",
             "ReleaseDate": "2017 12 12",
             "Components": [
                 {
@@ -7082,12 +7196,12 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo A2"
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso A2"
                         }
                     ]
@@ -7113,7 +7227,7 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
                         }
                     ]
@@ -7144,12 +7258,12 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith W1"
                         }
                     ]
@@ -7175,12 +7289,12 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
                         }
                     ]
@@ -7193,10 +7307,10 @@
             ]
         },
         {
-            "Vaulted": false,
+            "Vaulted": true,
             "Name": "Mirage Prime",
-            "EstimatedVaultedDate": "2019 10 10",
-            "VaultedDate": "n/a",
+            "EstimatedVaultedDate": "2019 10 01",
+            "VaultedDate": "2019 10 01",
             "ReleaseDate": "2017 12 12",
             "Components": [
                 {
@@ -7220,7 +7334,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
                         }
                     ]
@@ -7251,12 +7365,12 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi T2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith W1"
                         }
                     ]
@@ -7282,7 +7396,7 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
                         }
                     ]
@@ -7308,12 +7422,12 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi R2"
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
                         }
                     ]
@@ -7348,7 +7462,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo A2"
                         },
                         {
@@ -7365,6 +7479,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Meso N7"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo Z4"
                         }
                     ]
                 },
@@ -7394,8 +7513,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Lith K3"
                         }
                     ]
                 },
@@ -7432,6 +7556,11 @@
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Axi L5"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi G3"
                         }
                     ]
                 },
@@ -7470,13 +7599,18 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
                         },
                         {
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Neo R2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith K3"
                         }
                     ]
                 },
@@ -7503,6 +7637,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Axi D1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
                         }
                     ]
                 },
@@ -7573,7 +7712,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith K2"
                         },
                         {
@@ -7585,6 +7724,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo Z3"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -7630,7 +7774,7 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo A2"
                         },
                         {
@@ -7640,8 +7784,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso A2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
                         }
                     ]
                 },
@@ -7661,8 +7810,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Neo Z4"
                         }
                     ]
                 },
@@ -7696,7 +7850,7 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
                         },
                         {
@@ -7727,8 +7881,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi P1"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
                         }
                     ]
                 },
@@ -7743,7 +7902,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo A2"
                         },
                         {
@@ -7753,13 +7912,18 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
                         },
                         {
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Meso N7"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
                         }
                     ]
                 },
@@ -7788,8 +7952,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith L1"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
                         }
                     ]
                 },
@@ -7804,7 +7973,7 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo A2"
                         },
                         {
@@ -7821,6 +7990,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Meso N7"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi T3"
                         }
                     ]
                 },
@@ -7896,18 +8070,23 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi R2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith L1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso E3"
                         }
                     ]
                 },
@@ -7955,6 +8134,11 @@
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Lith M4"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
                         }
                     ]
                 },
@@ -8020,13 +8204,18 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi R2"
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso D4"
                         }
                     ]
                 },
@@ -8053,6 +8242,11 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Axi D1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
                         }
                     ]
                 },
@@ -8107,8 +8301,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith W1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith S8"
                         }
                     ]
                 },
@@ -8123,8 +8322,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Axi G3"
                         }
                     ]
                 },
@@ -8158,13 +8362,18 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
                         },
                         {
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Axi L5"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
                         }
                     ]
                 },
@@ -8179,13 +8388,18 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith K2"
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith K3"
                         }
                     ]
                 },
@@ -8226,8 +8440,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith S8"
                         }
                     ]
                 },
@@ -8297,8 +8516,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
                         }
                     ]
                 },
@@ -8335,13 +8559,18 @@
                     "Relics": [
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo Z2"
                         },
                         {
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Neo Z3"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
                         }
                     ]
                 },
@@ -8386,8 +8615,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith A3"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
                         }
                     ]
                 },
@@ -8404,6 +8638,11 @@
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Meso Z3"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -8423,8 +8662,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi P1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso D4"
                         }
                     ]
                 },
@@ -8448,8 +8692,13 @@
                     "Relics": [
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi R2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -8469,8 +8718,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Neo Z4"
                         }
                     ]
                 },
@@ -8490,8 +8744,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
                         }
                     ]
                 },
@@ -8520,8 +8779,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso A2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi T3"
                         }
                     ]
                 },
@@ -8536,8 +8800,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi P1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
                         }
                     ]
                 },
@@ -8547,8 +8816,13 @@
                     "Relics": [
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso E2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Meso E3"
                         }
                     ]
                 },
@@ -8563,8 +8837,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith L1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
                         }
                     ]
                 },
@@ -8588,8 +8867,13 @@
                     "Relics": [
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi T2"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Axi T3"
                         }
                     ]
                 },
@@ -8604,8 +8888,13 @@
                         },
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso A2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
                         }
                     ]
                 },
@@ -8620,8 +8909,13 @@
                         },
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
                         }
                     ]
                 },
@@ -8645,8 +8939,13 @@
                     "Relics": [
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi T2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -8658,6 +8957,11 @@
                             "Rarity": "Uncommon",
                             "Vaulted": false,
                             "Name": "Lith M4"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso E3"
                         }
                     ]
                 },
@@ -8683,8 +8987,13 @@
                         },
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Lith S8"
                         }
                     ]
                 },
@@ -8719,8 +9028,13 @@
                     "Relics": [
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi M1"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
                         }
                     ]
                 },
@@ -8730,8 +9044,13 @@
                     "Relics": [
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith L1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
                         }
                     ]
                 },
@@ -8741,8 +9060,13 @@
                     "Relics": [
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso A2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
                         }
                     ]
                 },
@@ -8777,8 +9101,13 @@
                     "Relics": [
                         {
                             "Rarity": "Common",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi G2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Neo T2"
                         }
                     ]
                 },
@@ -8788,8 +9117,13 @@
                     "Relics": [
                         {
                             "Rarity": "Rare",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Lith W1"
+                        },
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
                         }
                     ]
                 },
@@ -8799,8 +9133,13 @@
                     "Relics": [
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Meso K2"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Axi R3"
                         }
                     ]
                 },
@@ -8810,8 +9149,13 @@
                     "Relics": [
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Neo S12"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith K3"
                         }
                     ]
                 },
@@ -8835,8 +9179,13 @@
                     "Relics": [
                         {
                             "Rarity": "Uncommon",
-                            "Vaulted": false,
+                            "Vaulted": true,
                             "Name": "Axi P1"
+                        },
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
                         }
                     ]
                 },
@@ -8859,11 +9208,179 @@
                             "Rarity": "Common",
                             "Vaulted": false,
                             "Name": "Neo R2"
+                        },
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi G3"
                         }
                     ]
                 },
                 {
                     "Ducats": 160,
+                    "Relics": [],
+                    "Name": "Set"
+                }
+            ]
+        },
+        {
+            "Vaulted": false,
+            "Name": "Atlas Prime",
+            "EstimatedVaultedDate": "2021 08 15",
+            "VaultedDate": "n/a",
+            "ReleaseDate": "2019 10 01",
+            "Components": [
+                {
+                    "Ducats": 100,
+                    "Name": "Neuroptics",
+                    "Relics": [
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Axi A6"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 15,
+                    "Name": "Blueprint",
+                    "Relics": [
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 45,
+                    "Name": "Systems",
+                    "Relics": [
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Neo A3"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 45,
+                    "Name": "Chassis",
+                    "Relics": [
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Meso E3"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": null,
+                    "Relics": [],
+                    "Name": "Set"
+                }
+            ]
+        },
+        {
+            "Vaulted": false,
+            "Name": "Dethcube Prime",
+            "EstimatedVaultedDate": "2021 08 15",
+            "VaultedDate": "n/a",
+            "ReleaseDate": "2019 10 01",
+            "Components": [
+                {
+                    "Ducats": 100,
+                    "Name": "Cerebrum",
+                    "Relics": [
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Meso D4"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 45,
+                    "Name": "Carapace",
+                    "Relics": [
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Neo T2"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 15,
+                    "Name": "Systems",
+                    "Relics": [
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Axi P2"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 45,
+                    "Name": "Blueprint",
+                    "Relics": [
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Lith D1"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": null,
+                    "Relics": [],
+                    "Name": "Set"
+                }
+            ]
+        },
+        {
+            "Vaulted": false,
+            "Name": "Tekko Prime",
+            "EstimatedVaultedDate": "2021 08 15",
+            "VaultedDate": "n/a",
+            "ReleaseDate": "2019 10 01",
+            "Components": [
+                {
+                    "Ducats": 100,
+                    "Name": "Blade",
+                    "Relics": [
+                        {
+                            "Rarity": "Rare",
+                            "Vaulted": false,
+                            "Name": "Neo T2"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 45,
+                    "Name": "Blueprint",
+                    "Relics": [
+                        {
+                            "Rarity": "Uncommon",
+                            "Vaulted": false,
+                            "Name": "Lith L2"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": 15,
+                    "Name": "Gauntlet",
+                    "Relics": [
+                        {
+                            "Rarity": "Common",
+                            "Vaulted": false,
+                            "Name": "Meso W1"
+                        }
+                    ]
+                },
+                {
+                    "Ducats": null,
                     "Relics": [],
                     "Name": "Set"
                 }
