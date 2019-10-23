@@ -9,11 +9,9 @@ module.exports.platinum = function (message) {
     stringWfNexus = string.trim()
     stringWfMarket = wiki.toLowerCase().trim()
 
-    var returnValues
-
     axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
         .then((response) => {
-            returnValues = prixMin(response)
+            var returnValues = prixMin(response)
             console.log("\n\n")
             console.log(response)
             let embed = new Discord.RichEmbed()
@@ -25,19 +23,39 @@ module.exports.platinum = function (message) {
                 .addBlankField()
                 .addField("Prix d'achat maximum de " + string, ":white_small_square: Online in game : " + returnValues[2] + " (``/w " + returnValues[5] + "``)")
             message.channel.send(embed)
-        }).catch(function (err){
+        }).catch(function (err) {
             message.channel.send("" + err)
         })
 }
 
 function prixMin(response) {
-    var prix = [10000000, 10000000, 0] //[0] = prixmin, [1] = prixminoffline, [2] = prixmax
-    var user = ["", "", ""] //[0] = usersell, [1] = userselloffline, [2] = usermax
-    console.log(response)
     var orders = response.data.payload.orders
-    //var returnValue = [user, prix]
+    var prix1init, prix2init, prix3init, user1init, user2init, user3init, i = 0
+    while((!prix1init || !prix2init) && i != orders.length) {
+        if (orders[i].platform == "pc" && orders[i].region === "en") {
+            if (orders[i].order_type === "sell") {
+                if (orders[i].user.status == "ingame" && !prix1init) {
+                    prix1init = orders[i].platinum
+                    user1init = orders[i].user.ingame_name
+                } else if (orders[i].user.status == "offline" && !prix2init) {
+                    prix2init = orders[i].platinum
+                    user2init = orders[i].user.ingame_name
+                }
+            } else if (orders[i].order_type === "sell") {
+                if (orders[i].user.status == "ingame") {
+                    prix3init = orders[i].platinum
+                    user3init = orders[i].user.ingame_name
+                }
+            }
+        }
+        i++
+    }
+
+    var prix = [prix1init, prix2init, prix3init] //[0] = prixmin, [1] = prixminoffline, [2] = prixmax
+    var user = [user1init, user2init, user3init] //[0] = usersell, [1] = userselloffline, [2] = userbuy
+
     for (var i = 0; i < orders.length; i++) {
-        if (orders[i].platform == "pc") {
+        if (orders[i].platform == "pc" && orders[i].region === "en") {
             if (orders[i].order_type === "sell") {
                 if (orders[i].user.status == "ingame") {
                     if (orders[i].platinum < prix[0]) {
