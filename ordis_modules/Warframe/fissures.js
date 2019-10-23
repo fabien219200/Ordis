@@ -6,28 +6,16 @@ module.exports.liste = function (message) {
         .then((response) => {
             console.log("\n\n")
             console.log(response)
-            msg = ""
-            for (i = 0; i < response.data.length; i++) {
-                ennemie = response.data[i].enemy
-                mission = response.data[i].missionType
-                if (response.data[i].missionType != "Extermination") {
-                    wiki = mission.split(" ").join("_")
-                } else {
-                    wiki = "Exterminate"
-                }
-                nom = response.data[i].node
-                tmpRestant = response.data[i].eta
-                tier = response.data[i].tier
-                msg = msg + "[" + tier + " " + ennemie + " " + mission + "](https://warframe.fandom.com/wiki/" + wiki + "), " + nom + ".\nExpire dans " + tmpRestant + "\n"
-            }
             let embed = new Discord.RichEmbed()
                 .setTitle("Fissures")
                 .setURL("https://warframe.fandom.com/wiki/Void_Fissure")
                 .setColor('#ffd642')
-                .setDescription(msg)
-                .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/5/57/VoidTearIcon_b.png/revision/latest?cb=20160713085454")
+            for (var i = 0; i < response.data.length || i > 25; i++) {
+                embed.addField("**" + response.data[i].tier + " " + response.data[i].enemy + " " + response.data[i].missionType + "** *" + response.data[i].node + "*", "Expire dans " + response.data[i].eta)
+            }
+            embed.setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/5/57/VoidTearIcon_b.png/revision/latest?cb=20160713085454")
             message.channel.send(embed)
-        }).catch(function (err){
+        }).catch(function (err) {
             message.channel.send("" + err)
         })
 }
