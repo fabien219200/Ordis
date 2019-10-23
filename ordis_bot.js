@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 const axios = require('axios')
+
 const fandom = require('./ordis_modules/Warframe/fandom')
 const infoBot = require('./ordis_modules/Discord/infoBot')
 const sondage = require('./ordis_modules/Discord/sondage')
@@ -15,15 +16,33 @@ const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 
-
-
 const prefixWarframe = "/"
 const prefixDiscord = "!"
+
+var tabEmbeds = []
+
 
 bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
+    setInterval(funcTest, 60000)
 })
+
+function funcTest() {
+    var message
+    axios.get('https://api.warframestat.us/pc/cetusCycle')
+        .then((response) => {
+            if (response.data.isDay) {
+                message = "la 🌑 dans " + response.data.timeLeft.split("m")[0] + "m"
+            } else {
+                message = "le ☀ dans " + response.data.timeLeft.split("m")[0] + "m"
+            }
+            bot.user.setActivity(message, { type: "WATCHING" })
+        }).catch((err) => {
+            console.log(err)
+        })
+}
+
 
 
 bot.on('message', message => {
@@ -83,6 +102,11 @@ bot.on('message', message => {
     if (message.content.startsWith(prefixDiscord + "user")) {
     userInfo.info(message)
     }
+
+//     if (message.embeds.length != 0) {
+//         tabEmbeds.push(message.embeds[message.embeds.length - 1])
+//     }
+//     console.log(tabEmbeds)
 
     
 })
