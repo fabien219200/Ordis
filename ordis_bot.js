@@ -36,7 +36,7 @@ function funcTest() {
             if (response.data.isDay) {
                 message = "🌑: " + response.data.timeLeft.split("m")[0] + "m | "
             } else {
-                message = "☀: " + response.data.timeLeft.split("m")[0] + "m |"
+                message = "☀: " + response.data.timeLeft.split("m")[0] + "m | "
             }
             axios.get('https://api.warframestat.us/pc/earthCycle')
                 .then((response2) => {
