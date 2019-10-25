@@ -30,14 +30,25 @@ bot.on('ready', () => {
 
 function funcTest() {
     var message
+    //bot.user.setActivity("TEST1")
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
             if (response.data.isDay) {
-                message = "la 🌑 dans " + response.data.timeLeft.split("m")[0] + "m"
+                message = "🌑: " + response.data.timeLeft.split("m")[0] + "m | "
             } else {
-                message = "le ☀ dans " + response.data.timeLeft.split("m")[0] + "m"
+                message = "☀: " + response.data.timeLeft.split("m")[0] + "m |"
             }
-            bot.user.setActivity(message, { type: "WATCHING" })
+            axios.get('https://api.warframestat.us/pc/earthCycle')
+                .then((response2) => {
+                    if (response2.data.isDay) {
+                        message = message + "🌑(T): " + response2.data.timeLeft.split("m")[0] + "m"
+                    } else {
+                        message = message + "☀(T): " + response2.data.timeLeft.split("m")[0] + "m"
+                    }
+                    bot.user.setActivity(message, { type: "WATCHING" })
+                }).catch((err) => {
+                    console.log(err)
+                })
         }).catch((err) => {
             console.log(err)
         })
