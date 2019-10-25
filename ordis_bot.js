@@ -34,16 +34,16 @@ function funcTest() {
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
             if (response.data.isDay) {
-                message = "🌑: " + response.data.timeLeft.split("m")[0] + "m | "
-            } else {
                 message = "☀: " + response.data.timeLeft.split("m")[0] + "m | "
+            } else {
+                message = "🌑: " + response.data.timeLeft.split("m")[0] + "m | "
             }
             axios.get('https://api.warframestat.us/pc/earthCycle')
                 .then((response2) => {
                     if (response2.data.isDay) {
-                        message = message + "🌑(T): " + response2.data.timeLeft.split("m")[0] + "m"
-                    } else {
                         message = message + "☀(T): " + response2.data.timeLeft.split("m")[0] + "m"
+                    } else {
+                        message = message + "🌑(T): " + response2.data.timeLeft.split("m")[0] + "m"
                     }
                     bot.user.setActivity(message, { type: "WATCHING" })
                 }).catch((err) => {
