@@ -31,7 +31,7 @@ module.exports.platinum = function (message) {
 function prixMin(response) {
     var orders = response.data.payload.orders
     var prix1init, prix2init, prix3init, user1init, user2init, user3init, i = 0
-    while((!prix1init || !prix2init) && i != orders.length) {
+    while((!prix1init || !prix2init || !prix3init) && i != orders.length) {
         if (orders[i].platform == "pc" && orders[i].region === "en") {
             if (orders[i].order_type === "sell") {
                 if (orders[i].user.status == "ingame" && !prix1init) {
@@ -41,7 +41,7 @@ function prixMin(response) {
                     prix2init = orders[i].platinum
                     user2init = orders[i].user.ingame_name
                 }
-            } else if (orders[i].order_type === "sell") {
+            } else if (orders[i].order_type === "buy" && !prix3init) {
                 if (orders[i].user.status == "ingame") {
                     prix3init = orders[i].platinum
                     user3init = orders[i].user.ingame_name
