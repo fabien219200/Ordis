@@ -13,7 +13,7 @@ module.exports.liste = function (message) {
                     .setURL("https://warframe.fandom.com/wiki/Baro_Ki%27Teer")
                     .setDescription("Baro est sur : **" + baro.location + "**")
                     .setThumbnail("https://images-ext-1.discordapp.net/external/ox8-csb1P1dgk0KnMGDVIDjh8zeGHzGtGKq1vxvVdCI/https/cdn.warframestat.us/genesis/img/baro.png?width=328&height=670")
-                    for(var i = 0; i > baro.inventory.length || i < 25; i++){
+                    for(var i = 0; i < baro.inventory.length || i > 25; i++){
                         embed.addField(baro.inventory[i].item, baro.inventory[i].ducats + " Ducats | " + baro.inventory[i].credits + " Credits", true)
                     }
                     embed.setFooter("S'en va dans " + baro.endString)
