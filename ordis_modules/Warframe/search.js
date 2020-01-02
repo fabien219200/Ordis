@@ -3,7 +3,6 @@ const axios = require('axios')
 const fs = require('fs')
 const fonctions = require('../../ordis_bot')
 
-
 module.exports.infos = function (message) {
     var query = message.content.split(" ").slice(1).join(" ")
     var category, desc, released, mastery, name, type, image, recepie
