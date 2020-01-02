@@ -27,10 +27,10 @@ var tabEmbeds = []
 bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
-    setInterval(funcTest, 60000)
+    setInterval(cetusState, 60000)
 })
 
-function funcTest() {
+function cetusState() {
     var message
     //bot.user.setActivity("TEST1")
     axios.get('https://api.warframestat.us/pc/cetusCycle')
