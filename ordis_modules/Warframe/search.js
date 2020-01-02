@@ -6,17 +6,8 @@ const fonctions = require('../../ordis_bot')
 
 module.exports.infos = function (message) {
     var query = message.content.split(" ").slice(1).join(" ")
-    var category, desc, released, mastery, name, type, estimatedVault, image, availableRelics, recepie
+    var category, desc, released, mastery, name, type, image, recepie
     var data
-    var availableRelics
-    fs.readFile('./Ressources/relics.json', (err, jsonData) => {
-        if (err) {
-            console.log(err)
-        } else {
-            var Relics = JSON.parse(jsonData).data
-        }
-        //console.log(Relics)
-        
         axios.get("https://api.warframestat.us/weapons/search/" + query)
             .then((response) => {
                 if (response.data.length != 0) {
@@ -26,14 +17,6 @@ module.exports.infos = function (message) {
                             data = response.data[i]
                             //console.log(data)
                             if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
-                                availableRelics = relicsFunction(Relics, query)
-                                if (availableRelics[0] != "") {
-                                    estimatedVault = modifyDate(availableRelics[1])
-                                    var inRelics = "**Obtenable dans les reliques : **\n" + availableRelics[0]
-                                } else {
-                                    estimatedVault = "Item déja vaulté"
-                                    var inRelics = "**Reliques non droppables**"
-                                }
                                 category = data.category
                                 desc = data.description
                                 released = modifyDate(data.releaseDate)
@@ -43,7 +26,7 @@ module.exports.infos = function (message) {
                                 image = data.wikiaThumbnail
                                 var embed = new Discord.RichEmbed()
                                     .setTitle("Données de " + name)
-                                    .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
+                                    .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                     .setColor('#0101F2')
                                     .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(query).split(" ").join("_"))
                                     .setThumbnail(image)
@@ -51,7 +34,6 @@ module.exports.infos = function (message) {
                                     .addField("Type", type)
                                     .addField("Description", desc)
                                     .addField("Date de sortie", released)
-                                    .addField("Date de vault estimée", estimatedVault + "\n" + inRelics)
                                     .addField("Rang de maîtrise nécessaire", mastery)
                                 message.channel.send(embed)
                             } else {
@@ -65,7 +47,7 @@ module.exports.infos = function (message) {
                                 recipe = getRecipe(data.components)
                                 var embed = new Discord.RichEmbed()
                                     .setTitle("Données de " + name)
-                                    .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
+                                    .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                     .setColor('#0101F2')
                                     .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(query).split(" ").join("_"))
                                     .setThumbnail(image)
@@ -89,14 +71,6 @@ module.exports.infos = function (message) {
                                         data = response2.data[i]
                                         console.log(data)
                                         if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
-                                            availableRelics = relicsFunction(Relics, query)
-                                            if (availableRelics[0] != "") {
-                                                estimatedVault = modifyDate(availableRelics[1])
-                                                var inRelics = "**Obtenable dans les reliques : **\n" + availableRelics[0]
-                                            } else {
-                                                estimatedVault = "Item déja vaulté"
-                                                var inRelics = "**Reliques non droppables**"
-                                            }
                                             category = data.category
                                             desc = data.description
                                             released = modifyDate(data.releaseDate)
@@ -106,7 +80,7 @@ module.exports.infos = function (message) {
                                             image = data.wikiaThumbnail
                                             var embed = new Discord.RichEmbed()
                                                 .setTitle("Données de " + name)
-                                                .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
+                                                .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                                 .setColor('#0101F2')
                                                 .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(query).split(" ").join("_"))
                                                 .setThumbnail(image)
@@ -114,7 +88,6 @@ module.exports.infos = function (message) {
                                                 .addField("Type", type)
                                                 .addField("Description", desc)
                                                 .addField("Date de sortie", released)
-                                                .addField("Date de vault estimée", estimatedVault + "\n" + inRelics)
                                                 .addField("Rang de maîtrise nécessaire", mastery)
                                             message.channel.send(embed)
                                         } else {
@@ -127,7 +100,7 @@ module.exports.infos = function (message) {
                                             image = data.wikiaThumbnail
                                             var embed = new Discord.RichEmbed()
                                                 .setTitle("Données de " + name)
-                                                .setDescription("```fix\nEn cas de problème (mauvaises reliques, indiqué comme disponible alors que c'est vaulté, ...), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
+                                                .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                                 .setColor('#0101F2')
                                                 .setURL("https://warframe.fandom.com/wiki/" + fonctions.majuscule(query).split(" ").join("_"))
                                                 .setThumbnail(image)
@@ -152,32 +125,8 @@ module.exports.infos = function (message) {
                 message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
                 console.log(err)
             })
-    })
 }
 
-
-function relicsFunction(Relics, message) {
-    var availableRelics = ["", ""]
-    for (var j = 0; j < Relics.length; j++) {
-        if (Relics[j].Name.toLowerCase() == message.toLowerCase()) {
-            console.log("\n\n")
-            var relicsObject = Relics[j]
-            availableRelics[1] = relicsObject.EstimatedVaultDate
-            console.log(relicsObject)
-            for (var k = 0; k < relicsObject.Components.length - 1; k++) {
-                componentName = relicsObject.Components[k].Name
-                for (var l = 0; l < relicsObject.Components[k].Relics.length; l++) {
-                    relics = relicsObject.Components[k].Relics[l]
-                    if (!relics.Vaulted) {
-                        availableRelics[0] = availableRelics[0] + ":white_small_square:" + componentName + " : " + relics.Name + " (rareté : " + relics.Rarity + ")\n"
-                    }
-                }
-            }
-        }
-    }
-    availableRelics[1] = relicsObject.EstimatedVaultedDate
-    return availableRelics
-}
 
 function modifyDate(dateAnglais) {
     if (dateAnglais == undefined) {
