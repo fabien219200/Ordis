@@ -1,1 +1,1 @@
-module.exports.login = process.env.TOKEN
+module.exports.login = process.env.BOT_TOKEN
