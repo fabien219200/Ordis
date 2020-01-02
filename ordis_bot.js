@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 const axios = require('axios')
 
+const config = require('./Config')
+
 const fandom = require('./ordis_modules/Warframe/fandom')
 const infoBot = require('./ordis_modules/Discord/infoBot')
 const sondage = require('./ordis_modules/Discord/sondage')
@@ -185,7 +187,7 @@ bot.on("guildMemberRemove", member => {
     member.guild.channels.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
 })
 
-bot.login(process.env.BOT_TOKEN)
+bot.login(config.login)
 
 
 module.exports.majuscule = function (message) {
