@@ -17,6 +17,8 @@ const voidTrader = require('./ordis_modules/Warframe/voidTrader')
 const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
+const sentient = require('./ordis_modules/Warframe/sentient')
+
 
 const prefixWarframe = "/"
 const prefixDiscord = "!"
@@ -28,6 +30,7 @@ bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
+    setInterval(function () { sentient.tracker(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "vaisseau-sentients")) }, 60000)
 })
 
 function cetusState() {
