@@ -4,16 +4,16 @@ const axios = require('axios')
 const proximaNodes = require('../../Ressources/ProximaNodes')
 
 var isInitialized = 0
+var lastDate = 0
+
 module.exports.tracker = function (channel) {
     axios.get("https://api.warframestat.us/pc/sentientOutposts")
         .then(response => {
             var data = response.data
             console.log(data)
-            if (data.mission != null && (date < Date.now() + 1800000 || isInitialized == 0)) {
-                var date = new Date(Date.now())
-                date = date.getHours() + "h " + date.getMinutes() + "m"
-                var nextDate = new Date(Date.now() + 1800000)
-                nextDate = nextDate.getHours() + "h " + nextDate.getMinutes() + "m"
+            if (data.mission != null && (lastDate + 1800000 < Date.now() || isInitialized == 0)) {
+                var date = new Date(Date.now()).toLocaleTimeString("fr-FR")
+                var nextDate = new Date(Date.now() + 1800000).toLocaleTimeString("fr-FR")
                 var embed = new Discord.RichEmbed()
                     .setTitle("Anomalie sentient")
                     .setURL("https://warframe.fandom.com/wiki/Veil_Proxima")
@@ -23,7 +23,7 @@ module.exports.tracker = function (channel) {
                 //.setTimestamp(Date.now() + 1800000)
                 channel.send(embed)
 
-                var date = Date.now()
+                lastDate = Date.now()
 
                 if (isInitialized == 0) {
                     isInitialized = 1
