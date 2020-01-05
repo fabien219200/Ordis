@@ -22,7 +22,7 @@ module.exports.tracker = function (channel) {
                 //.setFooter("Se termine ")
                 //.setTimestamp(Date.now() + 1800000)
                 channel.send(embed)
-
+                console.log(lastDate)
                 lastDate = Date.now()
 
                 if (isInitialized == 0) {
