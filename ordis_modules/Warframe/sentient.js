@@ -12,7 +12,7 @@ module.exports.tracker = function (channel) {
             var data = response.data
             console.log(data)
             if (data.mission != null && (lastDate + 1800000 < Date.now() || isInitialized == 0)) {
-                var date = new Date(Date.now()).toLocaleTimeString("fr-FR")
+                var date = new Date(Date.now()).toLocaleTimeString("fr-fr")
                 var nextDate = new Date(Date.now() + 1800000).toLocaleTimeString("fr-FR")
                 var embed = new Discord.RichEmbed()
                     .setTitle("Anomalie sentient")
