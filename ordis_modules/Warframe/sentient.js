@@ -12,8 +12,8 @@ module.exports.tracker = function (channel) {
             var data = response.data
             console.log(data)
             if (data.mission != null && (lastDate + 3600000 < Date.now() || isInitialized == 0)) {
-                var date = new Date(Date.now()).toLocaleTimeString("fr-FR")
-                var nextDate = new Date(Date.now() + 1800000).toLocaleTimeString("fr-FR")
+                var date = new Date(Date.now()).toLocaleTimeString("fr-FR", { timeZone: 'Europe/Paris' })
+                var nextDate = new Date(Date.now() + 1800000).toLocaleTimeString("fr-FR", { timeZone: 'Europe/Paris' })
                 var embed = new Discord.RichEmbed()
                     .setTitle("Anomalie sentient")
                     .setURL("https://warframe.fandom.com/wiki/Veil_Proxima")
