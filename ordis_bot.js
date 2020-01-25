@@ -31,6 +31,8 @@ bot.on('ready', () => {
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { sentient.tracker(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "vaisseau-sentients")) }, 60000)
+    var date = new Date(Date.now())
+    console.log(date.getUTCHours() + ":" + date.getUTCMinutes() + " => " + date.getTimezoneOffset())
 })
 
 function cetusState() {
