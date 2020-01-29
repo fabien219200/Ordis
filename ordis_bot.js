@@ -18,6 +18,7 @@ const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 const sentient = require('./ordis_modules/Warframe/sentient')
+const rss = require('./ordis_modules/Warframe/rss')
 
 
 const prefixWarframe = "/"
@@ -31,6 +32,7 @@ bot.on('ready', () => {
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { sentient.tracker(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "vaisseau-sentients")) }, 60000)
+    setInterval(function () { rss.rssFeed("", bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes")) }, 300000)
 })
 
 function cetusState() {
@@ -119,12 +121,15 @@ bot.on('message', message => {
     userInfo.info(message)
     }
 
+    if (message.content.startsWith(prefixWarframe + "rss")) {
+        rss.rssFeed(message)
+    }
+
 //     if (message.embeds.length != 0) {
 //         tabEmbeds.push(message.embeds[message.embeds.length - 1])
 //     }
 //     console.log(tabEmbeds)
 
-    
 })
 
 bot.on('raw', event => {
