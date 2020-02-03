@@ -27,6 +27,7 @@ module.exports.rssFeed = function (message, rssChannel) {
                     var msgSend = rssChannel
                 }
                 var descLastPost = desc
+                console.log(descLastPost != descActualPost)
                 if (descLastPost != descActualPost) {
                     descActualPost = descLastPost
                     if (desc.split('').length > 2048) {
