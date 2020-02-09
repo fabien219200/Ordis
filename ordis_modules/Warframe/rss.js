@@ -17,7 +17,7 @@ module.exports.rssFeed = function (message, rssChannel) {
                     }
                 }
                 topicLastPost = data.item[indexLastPost]
-
+                var linkLastPost = topicLastPost.link[0]
                 if (message != "") {
                     var desc = topicLastPost.description[0].replace(/(\n)*?<[^>]*>?(\n)*/gm, '').trim()
                     var msgSend = message.channel
