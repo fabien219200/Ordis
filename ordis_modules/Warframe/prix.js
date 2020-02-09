@@ -12,8 +12,6 @@ module.exports.platinum = function (message) {
     axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
         .then((response) => {
             var returnValues = prixMin(response)
-            console.log("\n\n")
-            console.log(response)
             let embed = new Discord.RichEmbed()
                 .setTitle("Prix (warframe.market)")
                 .setURL("https://warframe.market/items/" + stringWfMarket)

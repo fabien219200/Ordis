@@ -12,9 +12,7 @@ module.exports.infos = function (message) {
                 if (response.data.length != 0) {
                     for (var i = 0; i < response.data.length; i++) {
                         if (query.toLowerCase() === response.data[i].name.toLowerCase()) {
-                            console.log("\n\n")
                             data = response.data[i]
-                            //console.log(data)
                             if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
                                 category = data.category
                                 desc = data.description
@@ -66,9 +64,7 @@ module.exports.infos = function (message) {
                             if (response2.data.length != 0) {
                                 for (var i = 0; i < response2.data.length; i++) {
                                     if (query.toLowerCase() === response2.data[i].name.toLowerCase()) {
-                                        console.log("\n\n")
                                         data = response2.data[i]
-                                        console.log(data)
                                         if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
                                             category = data.category
                                             desc = data.description

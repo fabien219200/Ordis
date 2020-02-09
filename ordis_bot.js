@@ -125,11 +125,6 @@ bot.on('message', message => {
         rss.rssFeed(message)
     }
 
-//     if (message.embeds.length != 0) {
-//         tabEmbeds.push(message.embeds[message.embeds.length - 1])
-//     }
-//     console.log(tabEmbeds)
-
 })
 
 bot.on('raw', event => {
@@ -206,6 +201,5 @@ module.exports.majuscule = function (message) {
         words[i] = letter.join("")
     }
     var msg = words.join(" ")
-    console.log(msg)
     return msg
 }

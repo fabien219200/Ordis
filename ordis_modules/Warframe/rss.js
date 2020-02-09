@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const axios = require('axios')
 const xmlParser = require('xml2js')
 
-var descActualPost = ""
+var linkActualPost = ""
 
 module.exports.rssFeed = function (message, rssChannel) {
     axios.get("https://forums.warframe.com/forum/3-pc-update-notes.xml/")
@@ -17,7 +17,6 @@ module.exports.rssFeed = function (message, rssChannel) {
                     }
                 }
                 topicLastPost = data.item[indexLastPost]
-                console.log(message)
 
                 if (message != "") {
                     var desc = topicLastPost.description[0].replace(/(\n)*?<[^>]*>?(\n)*/gm, '').trim()
@@ -26,10 +25,8 @@ module.exports.rssFeed = function (message, rssChannel) {
                     var desc = topicLastPost.description[0].replace(/<[^>]*>?/gm, '').replace(/(\n|\t)+/gm, '\n').trim()
                     var msgSend = rssChannel
                 }
-                var descLastPost = desc
-                console.log(descLastPost != descActualPost)
-                if (descLastPost != descActualPost) {
-                    descActualPost = descLastPost
+                if (linkLastPost != linkActualPost) {
+                    linkActualPost = linkLastPost
                     if (desc.split('').length > 2048) {
                         desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
                     }

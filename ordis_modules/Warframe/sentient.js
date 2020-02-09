@@ -10,7 +10,6 @@ module.exports.tracker = function (channel) {
     axios.get("https://api.warframestat.us/pc/sentientOutposts")
         .then(response => {
             var data = response.data
-            console.log(data)
             if (data.mission != null && (lastDate + 3600000 < Date.now() || isInitialized == 0)) {
                 var date = new Date(Date.now()).toLocaleTimeString("fr-FR", { timeZone: 'Europe/Paris' })
                 var nextDate = new Date(Date.now() + 1800000).toLocaleTimeString("fr-FR", { timeZone: 'Europe/Paris' })
@@ -22,7 +21,6 @@ module.exports.tracker = function (channel) {
                 //.setFooter("Se termine ")
                 //.setTimestamp(Date.now() + 1800000)
                 channel.send(embed)
-                console.log(lastDate)
                 lastDate = Date.now()
 
                 if (isInitialized == 0) {
