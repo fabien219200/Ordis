@@ -4,7 +4,7 @@ const fonctions = require('../../ordis_bot')
 
 module.exports.platinum = function (message) {
     var string = message.content.split(" ").slice(1).join(" ")
-    string = fonctions.majuscule(string)
+    string = fonctions.majuscule(string, " ")
     var wiki = string.split(" ").join("_")
     stringWfNexus = string.trim()
     stringWfMarket = wiki.toLowerCase().trim()

@@ -192,14 +192,20 @@ bot.on("guildMemberRemove", member => {
 
 bot.login(config.login)
 
-
-module.exports.majuscule = function (message) {
-    var words = message.split(" ")
+/**
+ * Returns the message with an uppercase at the beginning of each word.
+ * 
+ * @param {string} string The original string.
+ * @param  {string} joiner The string used to join each word of the original string.
+ * @returns {string} The message with an uppercase to each word.
+ */
+module.exports.majuscule = function (string, joiner) {
+    var words = string.split(" ")
     for (i = 0; i < words.length; i++) {
         var letter = words[i].split("")
         letter[0] = letter[0].toUpperCase()
         words[i] = letter.join("")
     }
-    var msg = words.join(" ")
+    var msg = words.join(joiner)
     return msg
 }
