@@ -19,6 +19,8 @@ const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 const sentient = require('./ordis_modules/Warframe/sentient')
 const rss = require('./ordis_modules/Warframe/rss')
+const primes = require('./ordis_modules/Warframe/primes')
+
 
 
 const prefixWarframe = "/"
@@ -37,7 +39,6 @@ bot.on('ready', () => {
 
 function cetusState() {
     var message
-    //bot.user.setActivity("TEST1")
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
             if (response.data.isDay) {
@@ -73,7 +74,7 @@ bot.on('message', message => {
         infoBot.info(message)
     }
 
-    if (message.content.startsWith(prefixDiscord + "sondage")) { //TODO resoudre pb .then
+    if (message.content.startsWith(prefixDiscord + "sondage")) {
         sondage.question(message)
     }
 
@@ -89,7 +90,7 @@ bot.on('message', message => {
         cetus.status(message)
     }
 
-    if (message.content.startsWith(prefixWarframe + "prix")) { //TODO finir
+    if (message.content.startsWith(prefixWarframe + "prix")) {
         prix.platinum(message)
     }
 
@@ -123,6 +124,10 @@ bot.on('message', message => {
 
     if (message.content.startsWith(prefixWarframe + "rss")) {
         rss.rssFeed(message)
+    }
+    
+    if (message.content.startsWith(prefixWarframe + "prime")) {
+        primes.liste(message)
     }
 
 })
