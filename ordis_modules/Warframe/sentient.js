@@ -18,8 +18,6 @@ module.exports.tracker = function (channel) {
                     .setURL("https://warframe.fandom.com/wiki/Veil_Proxima")
                     .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/5/5a/SentientFactionIcon_b.png")
                     .setDescription("L'anomalie sentient se trouve actuellement sur :\n**__" + ConvertIdToNodeName(data.id) + "__**\n\n***Arrivé à " + date + " *** **|** *** Repart à " + nextDate + "***")
-                //.setFooter("Se termine ")
-                //.setTimestamp(Date.now() + 1800000)
                 channel.send(embed)
                 lastDate = Date.now()
 

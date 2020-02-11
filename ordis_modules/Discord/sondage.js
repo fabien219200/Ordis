@@ -8,7 +8,6 @@ module.exports.question = async function (message) {
             var desc = "Merci de réagir avec "
             for (var i = 0; i < emote.length; i++) {
                 if (message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase())) {
-                    console.log(message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase()))
                     desc = desc + " " + message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase())
                 } else {
                     desc = desc + emote[i]
@@ -24,7 +23,6 @@ module.exports.question = async function (message) {
             .addField(msg, desc)
             .setColor("#FF0200")
             .setTimestamp()
-        //message.channel.send("@here")
         message.channel.send(embed)
             .then(function (message) {
                 reaction(message, emote)
@@ -36,14 +34,12 @@ module.exports.question = async function (message) {
     } catch{
         let embed = new Discord.RichEmbed()
             .setTitle("Erreur de syntaxe !")
-            //.setThumbnail("")
             .setDescription("Il faut un message derière **!sondage** pour executer la commande")
         message.channel.send(embed)
     }
 }
 
 async function reaction(message, emote) {
-    //console.log(emote)
     if (emote) {
         for (var i = 0; i < emote.length; i++) {
             if (message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase())) {

@@ -4,8 +4,6 @@ const axios = require('axios')
 module.exports.liste = function(message) {
     axios.get("https://api.warframestat.us/pc/nightwave")
         .then((response) => {
-            console.log("\n\n")
-            console.log(response)
             let embed = new Discord.RichEmbed()
                 .setTitle("**__Nightwaves__**")
                 .setURL("https://semlar.com/challenges")

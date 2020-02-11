@@ -4,11 +4,7 @@ const axios = require('axios')
 module.exports.liste = function (message) {
     axios.get("https://api.warframestat.us/pc/invasions")
         .then((response) => {
-            console.log("\n\n")
-            console.log(response)
             invasion = response.data
-            var normal = ""
-            var infeste = ""
             var Earth = "", Venus = "", Mercury = "", Mars = "", Phobos = "", Ceres = "", Jupiter = "", Europe = "", Saturn = "", Uranus = "", Neptune = "", Pluto = "", Sedna = ""
 
             for (var i = 0; i < invasion.length; i++) {

@@ -4,7 +4,6 @@ const axios = require('axios')
 module.exports.liste = function (message) {
     axios.get("https://api.warframestat.us/pc/sortie")
         .then((response) => {
-            console.log(response)
             var sortie = response.data
             let embed = new Discord.RichEmbed()
                 .setTitle("**Sortie actuelle : " + sortie.faction + "\nBoss actuel : " + sortie.boss + "** ")

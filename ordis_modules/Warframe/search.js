@@ -36,7 +36,6 @@ module.exports.infos = function (message) {
                             } else {
                                 category = data.category
                                 desc = data.description
-                                //released = modifyDate(data.releaseDate)
                                 mastery = data.masteryReq
                                 name = data.name
                                 type = data.type
@@ -51,7 +50,6 @@ module.exports.infos = function (message) {
                                     .addField("Categorie", category)
                                     .addField("Type", type)
                                     .addField("Description", desc)
-                                    //.addField("Date de sortie", released)
                                     .addField("Rang de maîtrise nécessaire", mastery)
                                     .addField("Recette pour crafter : *" + name + "*", recipe)
                                 message.channel.send(embed)
@@ -88,7 +86,6 @@ module.exports.infos = function (message) {
                                         } else {
                                             category = data.category
                                             desc = data.description
-                                            //released = modifyDate(data.releaseDate)
                                             mastery = data.masteryReq
                                             name = data.name
                                             type = data.type
@@ -102,7 +99,6 @@ module.exports.infos = function (message) {
                                                 .addField("Categorie", category)
                                                 .addField("Type", type)
                                                 .addField("Description", desc)
-                                                //.addField("Date de sortie", released)
                                                 .addField("Rang de maîtrise nécessaire", mastery)
                                             message.channel.send(embed)
                                         }
@@ -146,7 +142,6 @@ function getRecipe(components) {
     } else {
         var recipe = ""
         for (var i = 0; i < components.length; i++) {
-            console.log(components[i])
             recipe = recipe + ":white_small_square:" + components[i].name + " : " + components[i].itemCount + "\n"
         }
         return recipe

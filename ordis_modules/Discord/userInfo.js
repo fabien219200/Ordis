@@ -14,8 +14,6 @@ module.exports.info = function (message) {
             }
         }
         if (user) {
-            console.log("\n\n")
-            console.log(user)
             if (!user.user.lastMessage) {
                 var lastMessageInfo = "**Aucun message envoyé pour le moment**"
             } else {

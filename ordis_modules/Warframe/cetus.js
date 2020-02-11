@@ -4,8 +4,6 @@ const axios = require('axios')
 module.exports.status = function (message) {
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
-            console.log("\n\n")
-            console.log(response)
             var chaine = response.data.shortString.split(" ")
             if (response.data.isDay == true) {
                 let embed = new Discord.RichEmbed()
