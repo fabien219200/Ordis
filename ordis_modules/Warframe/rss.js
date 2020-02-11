@@ -26,6 +26,7 @@ module.exports.rssFeed = function (message, rssChannel) {
                     var msgSend = rssChannel
                 }
                 if (linkLastPost != linkActualPost) {
+                    msgSend.send("Liens differents : Dernier lien => " + linkLastPost + " | Lien actuel => " + linkActualPost)
                     linkActualPost = linkLastPost
                     if (desc.split('').length > 2048) {
                         desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
