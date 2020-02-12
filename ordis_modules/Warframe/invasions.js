@@ -12,109 +12,109 @@ module.exports.liste = function (message) {
                     if (!invasion[i].vsInfestation) {
                         switch (invasion[i].node.split("(")[1].split(")")[0]) {
                             case "Earth":
-                                Earth = Earth + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Earth = Earth + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Venus":
-                                Venus = Venus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Venus = Venus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Mercury":
-                                Mercury = Mercury + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Mercury = Mercury + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Mars":
-                                Mars = Mars + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Mars = Mars + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Phobos":
-                                Phobos = Phobos + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Phobos = Phobos + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Ceres":
-                                Ceres = Ceres + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Ceres = Ceres + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Jupiter":
-                                Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Europa":
-                                Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + " | **Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Saturn":
-                                Saturn = Saturn + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Saturn = Saturn + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Uranus":
-                                Uranus = Uranus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Uranus = Uranus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Neptune":
-                                Neptune = Neptune + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Neptune = Neptune + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Pluto":
-                                Pluto = Pluto + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Pluto = Pluto + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Sedna":
-                                Sedna = Sedna + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense attaquants : " + invasion[i].attackerReward.itemString + " | Récompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Sedna = Sedna + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense attaquants** : " + invasion[i].attackerReward.itemString + "\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
                         }
                     } else {
                         switch (invasion[i].node.split("(")[1].split(")")[0]) {
                             case "Earth":
-                                Earth = Earth + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Earth = Earth + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Venus":
-                                Venus = Venus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Venus = Venus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Mercury":
-                                Mercury = Mercury + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Mercury = Mercury + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Mars":
-                                Mars = Mars + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Mars = Mars + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Phobos":
-                                Phobos = Phobos + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Phobos = Phobos + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Ceres":
-                                Ceres = Ceres + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Ceres = Ceres + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Jupiter":
-                                Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Jupiter = Jupiter + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Europa":
-                                Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Europe = Europe + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Saturn":
-                                Saturn = Saturn + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Saturn = Saturn + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Uranus":
-                                Uranus = Uranus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Uranus = Uranus + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Neptune":
-                                Neptune = Neptune + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Neptune = Neptune + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Pluto":
-                                Pluto = Pluto + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Pluto = Pluto + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
 
                             case "Sedna":
-                                Sedna = Sedna + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\nRécompense défenseurs : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
+                                Sedna = Sedna + "__**" + invasion[i].desc + "**__ _" + invasion[i].node + "_\n**Récompense défenseurs** : " + invasion[i].defenderReward.itemString + "\nTemps restant éstimé : " + invasion[i].eta + "\n\n"
                                 break
                         }
                     }
