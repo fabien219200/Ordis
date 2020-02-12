@@ -42,9 +42,9 @@ function cetusState() {
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
             if (response.data.isDay) {
-                message = "☀: " + response.data.timeLeft.split("m")[0] + "m | "
+                message = "☀: " + response.data.shortString.split(" ")[0] + " | "
             } else {
-                message = "🌑: " + response.data.timeLeft.split("m")[0] + "m | "
+                message = "🌑: " + response.data.shortString.split(" ")[0] + " | "
             }
             axios.get('https://api.warframestat.us/pc/earthCycle')
                 .then((response2) => {

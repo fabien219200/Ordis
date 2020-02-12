@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const axios = require('axios')
 
 module.exports.liste = function (message) {
-    axios.get("https://api.warframestat.us/pc/voidTrader")
+    axios.get("https://api.warframestat.us/pc/fr/voidTrader")
         .then((response) => {
             var baro = response.data
             if (baro.active) {
