@@ -19,7 +19,6 @@ const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 const sentient = require('./ordis_modules/Warframe/sentient')
-const rss = require('./ordis_modules/Warframe/rss')
 const primes = require('./ordis_modules/Warframe/primes')
 
 
@@ -36,8 +35,8 @@ bot.on('ready', () => {
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { sentient.tracker(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "vaisseau-sentients")) }, 60000)
-    setInterval(async function () {
-        await rss.rssFeed(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes"))
+    setInterval(function () {
+        axios.get("https://forums.warframe.com/forum/3-pc-update-notes.xml/")
             .then(response => {
                 xmlParser.parseString(response.data, (err, result) => {
                     var data = result.rss.channel[0]
@@ -68,7 +67,8 @@ bot.on('ready', () => {
                     }
                 })
             })
-    }, 300000)})
+    }, 300000)
+})
 
 function cetusState() {
     var message
@@ -138,27 +138,27 @@ bot.on('message', message => {
     if (message.content.startsWith(prefixWarframe + "sortie")) {
         sortie.liste(message)
     }
-    
-    if(message.content.startsWith(prefixWarframe + "baro")){
+
+    if (message.content.startsWith(prefixWarframe + "baro")) {
         voidTrader.liste(message)
     }
-    
-    if(message.content.startsWith(prefixWarframe + "invasions")){
+
+    if (message.content.startsWith(prefixWarframe + "invasions")) {
         invasions.liste(message)
     }
-    
+
     if (message.content.startsWith(prefixWarframe + "search")) {
         search.infos(message)
     }
 
     if (message.content.startsWith(prefixDiscord + "user")) {
-    userInfo.info(message)
+        userInfo.info(message)
     }
 
     if (message.content.startsWith(prefixWarframe + "rss")) {
         rss.rssFeed(message)
     }
-    
+
     if (message.content.startsWith(prefixWarframe + "prime")) {
         primes.liste(message)
     }
