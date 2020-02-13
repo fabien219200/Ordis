@@ -54,7 +54,7 @@ bot.on('ready', () => {
                     var desc = topicLastPost.description[0].replace(/<[^>]*>?/gm, '').replace(/(\n|\t)+/gm, '\n').trim()
 
                     if (linkLastPost != linkActualPost) {
-                        bot.guilds.find(guild => guild.name == "Fab test BOT").channels.find(channel => channel.name == "vaisseau-sentients").send("Liens differents : Dernier lien => " + linkActualPost + " | Lien actuel => " + linkLastPost)
+                        bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes").send("Liens differents : Dernier lien => " + linkActualPost + " | Lien actuel => " + linkLastPost)
                         if (desc.split('').length > 2048) {
                             desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
                         }
