@@ -63,7 +63,7 @@ bot.on('ready', () => {
                             .setURL(topicLastPost.link[0])
                             .setDescription(desc)
                             .setTimestamp(topicLastPost.pubDate[0])
-                        bot.guilds.find(guild => guild.name == "Fab test BOT").channels.find(channel => channel.name == "vaisseau-sentients").send(embed)
+                        bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes").send(embed)
                         linkActualPost = topicLastPost.link[0]
                     }
                 })
