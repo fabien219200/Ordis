@@ -19,15 +19,14 @@ const invasions = require('./ordis_modules/Warframe/invasions')
 const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 const sentient = require('./ordis_modules/Warframe/sentient')
+const rss = require('./ordis_modules/Warframe/rss')
 const primes = require('./ordis_modules/Warframe/primes')
-
 
 
 const prefixWarframe = "/"
 const prefixDiscord = "!"
 
 var tabEmbeds = []
-var linkActualPost = "Initialisation"
 
 
 bot.on('ready', () => {
@@ -35,39 +34,7 @@ bot.on('ready', () => {
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { sentient.tracker(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "vaisseau-sentients")) }, 60000)
-    setInterval(function () {
-        axios.get("https://forums.warframe.com/forum/3-pc-update-notes.xml/")
-            .then(response => {
-                xmlParser.parseString(response.data, (err, result) => {
-                    var data = result.rss.channel[0]
-                    var maxDate = 0
-                    for (var i = 0; i < data.item.length; i++) {
-                        if (new Date(data.item[i].pubDate[0]).valueOf() > maxDate) {
-                            maxDate = new Date(data.item[i].pubDate[0]).valueOf()
-                            var indexLastPost = i
-                        }
-                    }
-                    topicLastPost = data.item[indexLastPost]
-                    var linkLastPost = topicLastPost.link[0]
-
-                    var desc = topicLastPost.description[0].replace(/<[^>]*>?/gm, '').replace(/(\n|\t)+/gm, '\n').trim()
-
-                    if (linkLastPost != linkActualPost) {
-                        bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes").send("Liens differents : Dernier lien => " + linkActualPost + " | Lien actuel => " + linkLastPost)
-                        if (desc.split('').length > 2048) {
-                            desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
-                        }
-                        var embed = new Discord.RichEmbed()
-                            .setTitle("**__Nouveau Patch Note__** : " + topicLastPost.title[0])
-                            .setURL(topicLastPost.link[0])
-                            .setDescription(desc)
-                            .setTimestamp(topicLastPost.pubDate[0])
-                        bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes").send(embed)
-                        linkActualPost = topicLastPost.link[0]
-                    }
-                })
-            })
-    }, 300000)
+    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes")) }, 300000)
 })
 
 function cetusState() {
