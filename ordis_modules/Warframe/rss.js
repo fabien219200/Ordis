@@ -32,8 +32,8 @@ module.exports.rssFeed = function (rssChannel) {
                         .setDescription(desc)
                         .setTimestamp(topicLastPostPN.pubDate[0])
                     rssChannel.send(embedPN)
-                    prevDatePN = maxDatePN
                 }
+                prevDatePN = maxDatePN
             })
         })
     axios.get("https://forums.warframe.com/forum/123-developer-workshop-update-notes.xml/")
@@ -62,8 +62,8 @@ module.exports.rssFeed = function (rssChannel) {
                         .setDescription(desc)
                         .setTimestamp(topicLastPostWS.pubDate[0])
                     rssChannel.send(embedWS)
-                    prevDateWS = maxDateWS
                 }
+                prevDateWS = maxDateWS
             })
         })
 }
