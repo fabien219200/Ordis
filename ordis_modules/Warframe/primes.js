@@ -7,7 +7,7 @@ module.exports.liste = function (message) {
     msg = msg.replace(/( +prime)( .*)*/gim, "")
     msg = msg.split(' ')
     msg[msg.length] = "p."
-    var wfTab = ["Ash", "Atlas", "Banshee", "Baruuk", "Chroma", "Ember", "Equinox", "Excalibur", "Frost", "Gara", "Garuda", "Gauss", "Grendel", "Harrow", "Hildryn", "Hydroid", "Inaros", "Ivara", "Khora", "Limbo", "Loki", "Mag", "Mesa", "Mirage", "Nekros", "Nezha", "Nidus", "Nova", "Nyx", "Frost", "Oberon", "Octavia", "Revenant", "Rhino", "Saryn", "Titania", "Trinity", "Valkyr", "Vauban", "Volt", "Wisp", "Wukong", "Zephyr"]
+    var wfTab = ["Ash", "Atlas", "Banshee", "Baruuk", "Chroma", "Ember", "Equinox", "Excalibur", "Frost", "Gara", "Garuda", "Gauss", "Grendel", "Harrow", "Hildryn", "Hydroid", "Inaros", "Ivara", "Khora", "Limbo", "Loki", "Mag", "Mesa", "Mirage", "Nekros", "Nezha", "Nidus", "Nova", "Nyx", "Frost", "Oberon", "Octavia", "Odonata", "Revenant", "Rhino", "Saryn", "Titania", "Trinity", "Valkyr", "Vauban", "Volt", "Wisp", "Wukong", "Zephyr"]
     for (var i = 0; i < wfTab.length; i++) {
         if (msg[0].toLowerCase() == wfTab[i].toLowerCase()) {
             var isWf = true
