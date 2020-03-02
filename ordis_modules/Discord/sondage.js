@@ -4,37 +4,47 @@ module.exports.question = async function (message) {
     try {
         if (message.content.split("-").length == 3) {
             var emote = message.content.split("-")[1].split(" ")
-            var msg = message.content.split("-").slice(2)
-            var desc = "Merci de réagir avec "
+            var msg = message.content.split("-").slice(2).join(" ").replace(/ *(<@!)\d+>/g, "").trim()
+            var emoteDesc = "Merci de réagir avec "
             for (var i = 0; i < emote.length; i++) {
-                if (message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase())) {
-                    desc = desc + " " + message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase())
+                if (emote[i] == "") {
+                    emote.splice(i, 1)
+                    i--
                 } else {
-                    desc = desc + emote[i]
+                    emote[i] = emote[i].replace(/<*:\d*>*/g, "")
+                    if (message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].replace(/:/, "").toLowerCase())) {
+                        emoteDesc = emoteDesc + " " + message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].replace(/:/, "").toLowerCase())
+                    } else {
+                        emoteDesc = emoteDesc + emote[i]
+                    }
                 }
             }
         } else {
-            var msg = message.content.split(" ").slice(1).join(" ")
-            var desc = "Repondre avec :white_check_mark: ou :x:"
+            var msg = message.content.split(" ").slice(1).join(" ").replace(/ *(<@!)\d+>/g, "").trim()
+            var emoteDesc = "Repondre avec :white_check_mark: ou :x:"
         }
 
+        if (msg == "") {
+            throw "Message vide !"
+        }
+        
         var embed = new Discord.RichEmbed()
-            .setTitle("Sondage créé par " + message.author.username)
-            .addField(msg, desc)
+            .setTitle(msg)
+            .setDescription(emoteDesc)
             .setColor("#FF0200")
+            .setFooter("Message créé par " + message.author.username)
             .setTimestamp()
         message.channel.send(embed)
             .then(function (message) {
                 reaction(message, emote)
                 message.pin()
             }).catch(function (err) {
-                console.log(err)
                 message.channel.send("" + err)
             })
-    } catch{
-        let embed = new Discord.RichEmbed()
-            .setTitle("Erreur de syntaxe !")
-            .setDescription("Il faut un message derière **!sondage** pour executer la commande")
+    } catch (err) {
+        var embed = new Discord.RichEmbed()
+            .setTitle("Erreur !")
+            .setDescription("Une erreur est survenue. Contactez un developpeur pour corriger ce probleme : " + err)
         message.channel.send(embed)
     }
 }
