@@ -4,7 +4,7 @@ module.exports.question = async function (message) {
     try {
         if (message.content.split("-").length == 3) {
             var emote = message.content.split("-")[1].split(" ")
-            var msg = message.content.split("-").slice(2).join(" ").replace(/ *(<@!)\d+>/g, "").trim()
+            var msg = message.content.split("-").slice(2).join(" ").replace(/ *(<@(!|&))\d+>/g, "").trim()
             var emoteDesc = "Merci de réagir avec "
             for (var i = 0; i < emote.length; i++) {
                 if (emote[i] == "") {
