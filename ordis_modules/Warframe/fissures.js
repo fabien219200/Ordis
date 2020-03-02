@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const axios = require('axios')
 
 module.exports.liste = function (message) {
-    axios.get("https://api.warframestat.us/pc/fissures")
+    axios.get("https://api.warframestat.us/pc/fr/fissures")
         .then((response) => {
             let embed = new Discord.RichEmbed()
                 .setTitle("Fissures")
