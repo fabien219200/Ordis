@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 module.exports.question = async function (message) {
     try {
-        if (message.content.split("-").length == 3) {
+        if (message.content.split(" ")[1].startsWith("-")) {
             var emote = message.content.split("-")[1].split(" ")
             var msg = message.content.split("-").slice(2).join(" ").replace(/ *(<@(!|&))\d+>/g, "").trim()
             var emoteDesc = "Merci de réagir avec "
@@ -20,7 +20,7 @@ module.exports.question = async function (message) {
                 }
             }
         } else {
-            var msg = message.content.split(" ").slice(1).join(" ").replace(/ *(<@!)\d+>/g, "").trim()
+            var msg = message.content.split(" ").slice(1).join(" ").replace(/ *(<@(!|&))\d+>/g, "").trim()
             var emoteDesc = "Repondre avec :white_check_mark: ou :x:"
         }
 
