@@ -4,7 +4,8 @@ module.exports.question = async function (message) {
     try {
         if (message.content.split(" ")[1].startsWith("-")) {
             var emote = message.content.split("-")[1].split(" ")
-            var msg = message.content.split("-").slice(2).join(" ").replace(/ *(<@(!|&))\d+>/g, "").trim()
+            console.log(emote)
+            var msg = message.content.split("-").slice(2).join(" ").trim()
             var emoteDesc = "Merci de réagir avec "
             for (var i = 0; i < emote.length; i++) {
                 if (emote[i] == "") {
@@ -13,6 +14,7 @@ module.exports.question = async function (message) {
                 } else {
                     emote[i] = emote[i].replace(/<*:\d*>*/g, "")
                     if (message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].replace(/:/, "").toLowerCase())) {
+                        console.log(message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].toLowerCase()))
                         emoteDesc = emoteDesc + " " + message.guild.emojis.find(emoji => emoji.name.toLowerCase() === emote[i].replace(/:/, "").toLowerCase())
                     } else {
                         emoteDesc = emoteDesc + emote[i]
@@ -20,25 +22,29 @@ module.exports.question = async function (message) {
                 }
             }
         } else {
-            var msg = message.content.split(" ").slice(1).join(" ").replace(/ *(<@(!|&))\d+>/g, "").trim()
+            var msg = message.content.split(" ").slice(1).join(" ").trim()
             var emoteDesc = "Repondre avec :white_check_mark: ou :x:"
         }
 
         if (msg == "") {
             throw "Message vide !"
         }
-        
+        if (emoteDesc == "Merci de réagir avec ") {
+            throw "Emojis non spécifiés"
+        }
+
         var embed = new Discord.RichEmbed()
-            .setTitle(msg)
-            .setDescription(emoteDesc)
-            .setColor("#FF0200")
-            .setFooter("Message créé par " + message.author.username)
+            .setTitle("Message créé par " + message.author.username)
+            .setDescription("" + msg + "\n\n*" + emoteDesc + "*")
+            .setFooter("PS -> Pour toute suggestion sur la mise en forme ou l'apparence des sondages, veuillez vous referer au salon #proposition-commandes.")
             .setTimestamp()
+            .setColor("#FF0200")
         message.channel.send(embed)
             .then(function (message) {
                 reaction(message, emote)
-                message.pin()
+                //message.pin()
             }).catch(function (err) {
+                console.log(err)
                 message.channel.send("" + err)
             })
     } catch (err) {
