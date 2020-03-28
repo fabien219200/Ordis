@@ -102,9 +102,10 @@ module.exports.infos = function (message) {
                                     }
                                 }
                             }
-                        } else {
-                            message.channel.send("La recherche n'a donnée aucun résultat !\n")
                         }
+                        if (name == undefined) {
+                            message.channel.send("La recherche n'a donnée aucun résultat !")
+                        }    
                     }).catch(function (err) {
                         message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
                         console.log(err)
