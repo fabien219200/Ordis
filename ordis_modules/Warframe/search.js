@@ -4,13 +4,13 @@ const fs = require('fs')
 const fonctions = require('../../ordis_bot')
 
 module.exports.infos = function (message) {
-    var query = message.content.split(" ").slice(1).join(" ")
+    var query = message.content.split(" ").slice(1).join(" ").toLowerCase()
     var category, desc, released, mastery, name, type, image, recepie
     var data
     axios.get("https://api.warframestat.us/weapons/search/" + query)
         .then((response) => {
                 for (var i = 0; i < response.data.length; i++) {
-                    if (query.toLowerCase() === response.data[i].name.toLowerCase()) {
+                    if (query === response.data[i].name.toLowerCase()) {
                         data = response.data[i]
                         if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
                             category = data.category
@@ -59,7 +59,7 @@ module.exports.infos = function (message) {
                     .then((response2) => {
                         if (response2.data.length != 0) {
                             for (var i = 0; i < response2.data.length; i++) {
-                                if (query.toLowerCase() === response2.data[i].name.toLowerCase()) {
+                                if (query === response2.data[i].name.toLowerCase()) {
                                     data = response2.data[i]
                                     if (data.name.split(" ")[data.name.split(" ").length - 1] == "Prime") {
                                         category = data.category
