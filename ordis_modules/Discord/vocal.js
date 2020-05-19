@@ -8,10 +8,7 @@ module.exports.accessController = function (message) {
 
     if (user.voiceChannel != undefined) {
         let vocalChannel = user.voiceChannel
-        console.log(vocalChannel)
         var args = message.content.replace(/!\w+ +/, "").replace(/ +/, " ").split(" ")
-
-        console.log(isNaN(parseInt(args[0])))
 
         if (args[1] == "-a" && !isNaN(parseInt(args[0].trim()))) {
             isAdaptable = true
@@ -46,8 +43,6 @@ module.exports.accessController = function (message) {
     }
 
     function checkVocal(vocalId, isAdaptable) {
-        console.log(vocalId)
-        console.log(isAdaptable)
         let vocalChannel = message.guild.channels.find(channel => channel.id == vocalId)
         if (isAdaptable) {
             console.log(vocalChannel)
