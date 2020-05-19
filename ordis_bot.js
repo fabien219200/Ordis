@@ -20,6 +20,8 @@ const search = require('./ordis_modules/Warframe/search')
 const userInfo = require('./ordis_modules/Discord/userInfo')
 const rss = require('./ordis_modules/Warframe/rss')
 const primes = require('./ordis_modules/Warframe/primes')
+const vocal = require('./ordis_modules/Discord/vocal')
+
 
 
 const prefixWarframe = "/"
@@ -126,6 +128,10 @@ bot.on('message', message => {
 
     if (message.content.startsWith(prefixWarframe + "prime")) {
         primes.liste(message)
+    }
+
+    if (message.content.startsWith(prefixDiscord + "rename")) {
+        vocal.accessController(message)
     }
 
 })
