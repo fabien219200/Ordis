@@ -21,8 +21,7 @@ const userInfo = require('./ordis_modules/Discord/userInfo')
 const rss = require('./ordis_modules/Warframe/rss')
 const primes = require('./ordis_modules/Warframe/primes')
 const vocal = require('./ordis_modules/Discord/vocal')
-
-
+const lives = require('./ordis_modules/Warframe/lives')
 
 const prefixWarframe = "/"
 const prefixDiscord = "!"
@@ -35,6 +34,8 @@ bot.on('ready', () => {
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "lives")) }, 60000)
+
 })
 
 function cetusState() {
