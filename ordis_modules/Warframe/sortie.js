@@ -16,6 +16,6 @@ module.exports.liste = function (message) {
                 .setFooter("Expire dans " + sortie.eta)
             message.channel.send(embed)
         }).catch(function (err){
-            console.log("err dans liste => " + err.message)
+            console.error("err dans liste => " + err.message)
         })
 }

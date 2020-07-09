@@ -14,6 +14,6 @@ module.exports.liste = function (message) {
             embed.setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/5/57/VoidTearIcon_b.png/revision/latest?cb=20160713085454")
             message.channel.send(embed)
         }).catch(function (err) {
-            console.log("err dans liste => " + err.message)
+            console.error("err dans liste => " + err.message)
         })
 }

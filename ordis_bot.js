@@ -67,16 +67,24 @@ function cetusState() {
                     }
                     bot.user.setActivity(message, { type: "WATCHING" })
                 }).catch((err) => {
-                    console.log("err dans cetusState earthCycle => " + err.message)
+                    console.error("err dans cetusState earthCycle => " + err.message)
                 })
         }).catch((err) => {
-            console.log("err dans cetusState cetusCycle => " + err.message)
+            console.error("err dans cetusState cetusCycle => " + err.message)
         })
 }
 
 
 
 bot.on('message', message => {
+
+    if (!message.content.startsWith(prefixDiscord) || !message.content.startsWith(prefixWarframe) || message.author.bot) return;
+
+    const args = message.content.slice(1).split(' ');
+    const command = args.shift().toLowerCase();
+
+    console.log(args)
+
 
     if (message.content.startsWith('salut Ordis') | message.content.startsWith('Salut Ordis')) {
         message.reply("Salut cher ami")

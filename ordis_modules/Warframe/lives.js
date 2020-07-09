@@ -1,11 +1,13 @@
 const Discord = require('discord.js')
 const axios = require('axios')
 
+const config = require('../../configLocal') ? require('../../configLocal') : require('../../config')
+
 var token = null
 
-const SECRET = process.env.SECRET_TWITCH
-const CLIENT = process.env.CLIENT_TWITCH
-const STREAMER_ID = 31557216
+const SECRET = config.SECRET
+const CLIENT = config.CLIENT
+const STREAMER_ID = config.STREAMER_ID
 
 module.exports.checkLive = async function (channel) {
     if (token == null) {
@@ -31,17 +33,17 @@ module.exports.checkLive = async function (channel) {
                 }
             }
         }).catch(err => {
-            console.log("err dans checkLive => " + err.message)
+            console.error("err dans checkLive => " + err.message)
         })
 }
 
 async function getTwitchToken() {
-    axios.post("https://id.twitch.tv/oauth2/token?client_id=z60mz80m2bixejlevar26039p4qh3n&client_secret=" + SECRET + "&grant_type=client_credentials")
-        .then((response) => {
-            return response.data.access_token
-        }).catch(err => {
-            console.log("err dans checkLive getTwitchToken => " + err.message)
+    var response = await axios.post("https://id.twitch.tv/oauth2/token?client_id=z60mz80m2bixejlevar26039p4qh3n&client_secret=" + SECRET + "&grant_type=client_credentials")
+        .catch(err => {
+            console.error("err dans checkLive getTwitchToken => " + err.message)
         })
+    return response.data.access_token
+
 }
 
 async function getLastStreamDate(channel) {
@@ -49,7 +51,7 @@ async function getLastStreamDate(channel) {
     try {
         message = await channel.fetchMessages({ limit: 1 })
     } catch (err) {
-        console.log("err dans checkLive getlastStreamDate => " + err.message)
+        console.error("err dans checkLive getlastStreamDate => " + err.message)
     }
     var lastMessage = message.first()
     if (lastMessage.embeds.length != 0) {

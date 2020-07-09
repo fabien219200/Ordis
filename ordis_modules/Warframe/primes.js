@@ -83,6 +83,6 @@ module.exports.liste = function (message) {
             }
             message.channel.send(embed)
         }).catch(err => {
-            console.log("err dans liste => " + err.message)
+            console.error("err dans liste => " + err.message)
         })
 }
