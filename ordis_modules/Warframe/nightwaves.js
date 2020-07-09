@@ -17,6 +17,6 @@ module.exports.liste = function(message) {
                 .setTimestamp(response.data.activeChallenges[4].expiry)
             message.channel.send(embed)
         }).catch(function (err){
-            message.channel.send("" + err)
+            console.log("err dans liste => " + err.message)
         })
 }

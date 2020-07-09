@@ -127,6 +127,6 @@ module.exports.liste = function (message) {
                 .setDescription(msg)
             message.channel.send(embed)
         }).catch(function (err){
-            message.channel.send("" + err)
+            console.log("err dans liste => " + err.message)
         })
 }

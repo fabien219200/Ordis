@@ -22,7 +22,7 @@ module.exports.platinum = function (message) {
                 .addField("Prix d'achat maximum de " + string, ":white_small_square: Online in game : " + returnValues[2] + " (``/w " + returnValues[5] + "``)")
             message.channel.send(embed)
         }).catch(function (err) {
-            message.channel.send("" + err)
+            console.log("err dans platinum => " + err.message)
         })
 }
 

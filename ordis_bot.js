@@ -3,7 +3,18 @@ const bot = new Discord.Client()
 const axios = require('axios')
 const xmlParser = require('xml2js')
 
-const config = require('./config')
+const config = require('./configLocal') ? require('./configLocal') : require('./config')
+const guild = require('./configLocal') ? 'Fab test bot' : 'Warframe Kalldrax'
+
+// try {
+//     config = require('./configLocal')
+// } catch { 
+//     try {
+//         config = require('./config')
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 
 const fandom = require('./ordis_modules/Warframe/fandom')
 const infoBot = require('./ordis_modules/Discord/infoBot')
@@ -33,8 +44,8 @@ bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "patch-notes")) }, 300000)
-    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == "Warframe Kalldrax").channels.find(channel => channel.name == "lives")) }, 60000)
+    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == guild).channels.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == guild).channels.find(channel => channel.name == "lives")) }, 60000)
 
 })
 
@@ -56,10 +67,10 @@ function cetusState() {
                     }
                     bot.user.setActivity(message, { type: "WATCHING" })
                 }).catch((err) => {
-                    console.log(err)
+                    console.log("err dans cetusState earthCycle => " + err.message)
                 })
         }).catch((err) => {
-            console.log(err)
+            console.log("err dans cetusState cetusCycle => " + err.message)
         })
 }
 

@@ -31,17 +31,26 @@ module.exports.checkLive = async function (channel) {
                 }
             }
         }).catch(err => {
-            console.log(err)
+            console.log("err dans checkLive => " + err.message)
         })
 }
 
 async function getTwitchToken() {
-    response = await axios.post("https://id.twitch.tv/oauth2/token?client_id=z60mz80m2bixejlevar26039p4qh3n&client_secret=" + SECRET + "&grant_type=client_credentials")
-    return response.data.access_token
+    axios.post("https://id.twitch.tv/oauth2/token?client_id=z60mz80m2bixejlevar26039p4qh3n&client_secret=" + SECRET + "&grant_type=client_credentials")
+        .then((response) => {
+            return response.data.access_token
+        }).catch(err => {
+            console.log("err dans checkLive getTwitchToken => " + err.message)
+        })
 }
 
 async function getLastStreamDate(channel) {
-    message = await channel.fetchMessages({ limit: 1 })
+    var message
+    try {
+        message = await channel.fetchMessages({ limit: 1 })
+    } catch (err) {
+        console.log("err dans checkLive getlastStreamDate => " + err.message)
+    }
     var lastMessage = message.first()
     if (lastMessage.embeds.length != 0) {
         return new Date(lastMessage.embeds[0].timestamp).valueOf()

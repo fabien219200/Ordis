@@ -21,6 +21,6 @@ module.exports.status = function (message) {
                 message.channel.send(embed)
             }
         }).catch(function (err){
-            message.channel.send("" + err)
+            console.log("err dans status => " + err.message)
         })
 }

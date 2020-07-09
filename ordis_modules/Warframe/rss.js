@@ -35,6 +35,8 @@ module.exports.rssFeed = function (rssChannel) {
                 }
                 prevDatePN = maxDatePN
             })
+        }).catch((err) => {
+            console.log("err dans rssFeed => " + err.message)
         })
     axios.get("https://forums.warframe.com/forum/123-developer-workshop-update-notes.xml/")
         .then(response => {
@@ -65,5 +67,7 @@ module.exports.rssFeed = function (rssChannel) {
                 }
                 prevDateWS = maxDateWS
             })
+        }).catch((err) => {
+            console.log("err dans rssFeed => " + err.message)
         })
 }
