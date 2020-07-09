@@ -80,7 +80,7 @@ function cetusState() {
 
 bot.on('message', message => {
 
-    if (!message.content.startsWith(prefixDiscord) || !message.content.startsWith(prefixWarframe) || message.author.bot) return;
+    if ((!message.content.startsWith(prefixDiscord) && !message.content.startsWith(prefixWarframe)) || message.author.bot) return;
 
     const args = message.content.slice(1).split(' ');
     const command = args.shift().toLowerCase();
