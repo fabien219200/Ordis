@@ -1,8 +1,17 @@
 const Discord = require('discord.js')
 const axios = require('axios')
 
-const config = require('../../configLocal') ? require('../../configLocal') : require('../../config')
+var config
 
+try {
+    config = require('../../configLocal')
+} catch { 
+    try {
+        config = require('../../config')
+    } catch (e) {
+        console.error(e)
+    }
+}
 var token = null
 
 const SECRET = config.SECRET
