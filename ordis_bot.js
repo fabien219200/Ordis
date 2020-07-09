@@ -3,8 +3,8 @@ const bot = new Discord.Client()
 const axios = require('axios')
 const xmlParser = require('xml2js')
 
-const config = require('./configLocal') ? require('./configLocal') : require('./config')
-const guild = require('./configLocal') ? 'Fab test bot' : 'Warframe Kalldrax'
+const config = require('./configLocal') != undefined ? require('./configLocal') : require('./config')
+const guild = require('./configLocal') != undefined ? 'Fab test bot' : 'Warframe Kalldrax'
 
 // try {
 //     config = require('./configLocal')
