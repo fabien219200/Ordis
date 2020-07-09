@@ -3,8 +3,8 @@ const bot = new Discord.Client()
 const axios = require('axios')
 const xmlParser = require('xml2js')
 
-const config
-const globalGuild
+var config
+var globalGuild
 
 try {
     config = require('./configLocal')
