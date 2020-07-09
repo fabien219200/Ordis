@@ -3,18 +3,20 @@ const bot = new Discord.Client()
 const axios = require('axios')
 const xmlParser = require('xml2js')
 
-const config = require('./configLocal') != undefined ? require('./configLocal') : require('./config')
-const guild = require('./configLocal') != undefined ? 'Fab test bot' : 'Warframe Kalldrax'
+const config
+const globalGuild
 
-// try {
-//     config = require('./configLocal')
-// } catch { 
-//     try {
-//         config = require('./config')
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
+try {
+    config = require('./configLocal')
+    globalGuild = 'Fab test BOT'
+} catch { 
+    try {
+        config = require('./config')
+        globalGuild = 'Warframe Kalldrax'
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 const fandom = require('./ordis_modules/Warframe/fandom')
 const infoBot = require('./ordis_modules/Discord/infoBot')
@@ -44,8 +46,8 @@ bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == guild).channels.find(channel => channel.name == "patch-notes")) }, 300000)
-    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == guild).channels.find(channel => channel.name == "lives")) }, 60000)
+    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == globalGuild).channels.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == globalGuild).channels.find(channel => channel.name == "lives")) }, 60000)
 
 })
 
