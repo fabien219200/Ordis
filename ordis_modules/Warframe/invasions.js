@@ -1,8 +1,11 @@
 const Discord = require('discord.js')
 const axios = require('axios')
 
-module.exports.liste = function (message) {
-    axios.get("https://api.warframestat.us/pc/invasions")
+module.exports = {
+    name: 'Invasions',
+    description: 'Gets invasions',
+    execute(message) {
+        axios.get("https://api.warframestat.us/pc/invasions")
         .then((response) => {
             invasion = response.data
             var Earth = "", Venus = "", Mercury = "", Mars = "", Phobos = "", Ceres = "", Jupiter = "", Europe = "", Saturn = "", Uranus = "", Neptune = "", Pluto = "", Sedna = ""
@@ -121,12 +124,13 @@ module.exports.liste = function (message) {
                 }
             }
             var msg = Earth + Venus + Mercury + Mars + Phobos + Ceres + Jupiter + Europe + Saturn + Uranus + Neptune + Pluto + Sedna
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setTitle("Invasions")
                 .setURL("https://warframe.fandom.com/wiki/Invasion")
                 .setDescription(msg)
             message.channel.send(embed)
-        }).catch(function (err){
+        }).catch(function (err) {
             console.error("err dans liste => " + err.message)
         })
+    }
 }

@@ -3,12 +3,15 @@ const axios = require('axios')
 const fs = require('fs')
 const fonctions = require('../../ordis_bot')
 
-module.exports.infos = function (message) {
-    var query = message.content.split(" ").slice(1).join(" ").toLowerCase()
-    var category, desc, released, mastery, name, type, image, recepie
-    var data
-    axios.get("https://api.warframestat.us/weapons/search/" + query)
-        .then((response) => {
+module.exports = {
+    name: 'Search',
+    description: 'Gets info of a Warframe or a Weapon',
+    execute(message) {
+        var query = message.content.split(" ").slice(1).join(" ").toLowerCase()
+        var category, desc, released, mastery, name, type, image, recepie
+        var data
+        axios.get("https://api.warframestat.us/weapons/search/" + query)
+            .then((response) => {
                 for (var i = 0; i < response.data.length; i++) {
                     if (query === response.data[i].name.toLowerCase()) {
                         data = response.data[i]
@@ -20,7 +23,7 @@ module.exports.infos = function (message) {
                             name = data.name
                             type = data.type
                             image = data.wikiaThumbnail
-                            var embed = new Discord.RichEmbed()
+                            var embed = new Discord.MessageEmbed()
                                 .setTitle("Données de " + name)
                                 .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                 .setColor('#0101F2')
@@ -40,7 +43,7 @@ module.exports.infos = function (message) {
                             type = data.type
                             image = data.wikiaThumbnail
                             recipe = getRecipe(data.components)
-                            var embed = new Discord.RichEmbed()
+                            var embed = new Discord.MessageEmbed()
                                 .setTitle("Données de " + name)
                                 .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                 .setColor('#0101F2')
@@ -69,7 +72,7 @@ module.exports.infos = function (message) {
                                         name = data.name
                                         type = data.type
                                         image = data.wikiaThumbnail
-                                        var embed = new Discord.RichEmbed()
+                                        var embed = new Discord.MessageEmbed()
                                             .setTitle("Données de " + name)
                                             .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                             .setColor('#0101F2')
@@ -88,7 +91,7 @@ module.exports.infos = function (message) {
                                         name = data.name
                                         type = data.type
                                         image = data.wikiaThumbnail
-                                        var embed = new Discord.RichEmbed()
+                                        var embed = new Discord.MessageEmbed()
                                             .setTitle("Données de " + name)
                                             .setDescription("```fix\nEn cas de problème (infos incorrectes), merci de me le faire savoir pour que je puisse modifier le fichier source.\n```")
                                             .setColor('#0101F2')
@@ -105,15 +108,16 @@ module.exports.infos = function (message) {
                         }
                         if (name == undefined) {
                             message.channel.send("La recherche n'a donnée aucun résultat !")
-                        }    
+                        }
                     }).catch(function (err) {
                         message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
                         console.log(err)
                     })
-        }).catch(function (err) {
-            message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
-            console.log(err)
-        })
+            }).catch(function (err) {
+                message.channel.send("La recherche n'a donnée aucun résultat !\n" + err)
+                console.log(err)
+            })
+    }
 }
 
 

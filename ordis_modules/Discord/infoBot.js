@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 
 module.exports = {
-    name: 'infoBot',
-    description: 'Ping!',
+    name: 'GuildInfo',
+    description: 'Gets guild infos',
     execute(message) {
         let embed = new Discord.MessageEmbed()
             .setTitle("Info du bot")

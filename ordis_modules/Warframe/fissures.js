@@ -1,10 +1,13 @@
 const Discord = require('discord.js')
 const axios = require('axios')
 
-module.exports.liste = function (message) {
-    axios.get("https://api.warframestat.us/pc/fr/fissures")
+module.exports = {
+    name: 'Fissure',
+    description: 'Gets fissures',
+    execute(message) {
+        axios.get("https://api.warframestat.us/pc/fr/fissures")
         .then((response) => {
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setTitle("Fissures")
                 .setURL("https://warframe.fandom.com/wiki/Void_Fissure")
                 .setColor('#ffd642')
@@ -16,4 +19,5 @@ module.exports.liste = function (message) {
         }).catch(function (err) {
             console.error("err dans liste => " + err.message)
         })
+    }
 }
