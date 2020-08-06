@@ -1,7 +1,10 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
+bot.discordCommands = new Discord.Collection();
+bot.warframeCommands = new Discord.Collection();
+
 const axios = require('axios')
-const xmlParser = require('xml2js')
+const fs = require('fs')
 
 var config
 var globalGuild
@@ -9,7 +12,7 @@ var globalGuild
 try {
     config = require('./configLocal')
     globalGuild = 'Fab test BOT'
-} catch { 
+} catch {
     try {
         config = require('./config')
         globalGuild = 'Warframe Kalldrax'
@@ -18,23 +21,24 @@ try {
     }
 }
 
-const fandom = require('./ordis_modules/Warframe/fandom')
-const infoBot = require('./ordis_modules/Discord/infoBot')
-const sondage = require('./ordis_modules/Discord/sondage')
-const clear = require('./ordis_modules/Discord/clear')
-const cetus = require('./ordis_modules/Warframe/cetus')
-const prix = require('./ordis_modules/Warframe/prix')
-const fissures = require('./ordis_modules/Warframe/fissures')
-const nightwaves = require('./ordis_modules/Warframe/nightwaves')
-const sortie = require('./ordis_modules/Warframe/sortie')
-const voidTrader = require('./ordis_modules/Warframe/voidTrader')
-const invasions = require('./ordis_modules/Warframe/invasions')
-const search = require('./ordis_modules/Warframe/search')
-const userInfo = require('./ordis_modules/Discord/userInfo')
-const rss = require('./ordis_modules/Warframe/rss')
-const primes = require('./ordis_modules/Warframe/primes')
-const vocal = require('./ordis_modules/Discord/vocal')
-const lives = require('./ordis_modules/Warframe/lives')
+const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
+console.log(discordCommands)
+const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
+
+for (const file of discordCommands) {
+    const command = require(`./ordis_modules/Discord/${file}`);
+    console.log(require(`./ordis_modules/Discord/${file}`))
+    bot.discordCommands.set(command.name.toLowerCase(), command);
+}
+
+for (const file of warframeCommands) {
+    const command = require(`./ordis_modules/Warframe/${file}`);
+    console.log(require(`./ordis_modules/Warframe/${file}`))
+    bot.warframeCommands.set(command.name.toLowerCase(), command);
+}
+
+const rss = require('./Ressources/rss')
+const lives = require('./Ressources/lives')
 
 const prefixWarframe = "/"
 const prefixDiscord = "!"
@@ -46,8 +50,8 @@ bot.on('ready', () => {
     console.log("je suis connecté")
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.find(guild => guild.name == globalGuild).channels.find(channel => channel.name == "patch-notes")) }, 300000)
-    setInterval(function () { lives.checkLive(bot.guilds.find(guild => guild.name == globalGuild).channels.find(channel => channel.name == "lives")) }, 60000)
+    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
 
 })
 
@@ -80,83 +84,55 @@ function cetusState() {
 
 bot.on('message', message => {
 
-    if ((!message.content.startsWith(prefixDiscord) && !message.content.startsWith(prefixWarframe)) || message.author.bot) return;
-
-    const args = message.content.slice(1).split(' ');
-    const command = args.shift().toLowerCase();
-
-    console.log(args)
-
-
-    if (message.content.startsWith('salut Ordis') | message.content.startsWith('Salut Ordis')) {
+    if (message.content.toLowerCase().startsWith('salut ordis')) {
         message.reply("Salut cher ami")
     }
 
-    if (message.content.startsWith(prefixDiscord + "info")) {
-        infoBot.info(message)
+    if (message.content.startsWith(prefixDiscord) && !message.author.bot) {
+
+        const discordArgs = message.content.slice(1).split(/ +/)
+        const discordCommandName = discordArgs.shift().toLowerCase()
+        //------------------------
+        console.log("Discord")
+        console.log(discordCommandName)
+        console.log(discordArgs)
+        //------------------------
+        if (!bot.discordCommands.has(discordCommandName)) return
+
+        const discordCommand = bot.discordCommands.get(discordCommandName.toLowerCase())
+
+        try {
+            discordCommand.execute(message, discordArgs)
+        } catch (e) {
+            message.reply("Error : " + e)
+        }
     }
 
-    if (message.content.startsWith(prefixDiscord + "sondage")) {
-        sondage.question(message)
-    }
+    //----------------------------------------------------------------------------------------
 
-    if (message.content.startsWith(prefixWarframe + "wiki")) {
-        fandom.wiki(message)
-    }
 
-    if (message.content.startsWith(prefixDiscord + "clear")) {
-        clear.suppr(message)
-    }
+    if (message.content.startsWith(prefixWarframe) && !message.author.bot) {
 
-    if (message.content.startsWith(prefixWarframe + "cetus")) {
-        cetus.status(message)
-    }
+        const warframeArgs = message.content.slice(1).split(/ +/)
+        const warframeCommandName = warframeArgs.shift().toLowerCase()
+        //------------------------
+        console.log("Warframe")
+        console.log(warframeCommandName)
+        console.log(warframeArgs)
+        //------------------------
+        if (!bot.warframeCommands.has(warframeCommandName)) return
 
-    if (message.content.startsWith(prefixWarframe + "prix")) {
-        prix.platinum(message)
-    }
+        const warframeCommand = bot.warframeCommands.get(warframeCommandName.toLowerCase())
 
-    if (message.content.startsWith(prefixWarframe + "fissures")) {
-        fissures.liste(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "nightwaves")) {
-        nightwaves.liste(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "sortie")) {
-        sortie.liste(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "baro")) {
-        voidTrader.liste(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "invasions")) {
-        invasions.liste(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "search")) {
-        search.infos(message)
-    }
-
-    if (message.content.startsWith(prefixDiscord + "user")) {
-        userInfo.info(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "rss")) {
-        rss.rssFeed(message)
-    }
-
-    if (message.content.startsWith(prefixWarframe + "prime")) {
-        primes.liste(message)
-    }
-
-    if (message.content.startsWith(prefixDiscord + "rename")) {
-        vocal.accessController(message)
+        try {
+            warframeCommand.execute(message, warframeArgs)
+        } catch {
+            message.reply("Error")
+        }
     }
 
 })
+
 
 bot.on('raw', event => {
     var eventName = event.t
@@ -165,7 +141,7 @@ bot.on('raw', event => {
             if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
                 return
             } else {
-                bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
+                bot.channels.get(event.d.channel_id).messages.fetch(event.d.message_id)
                     .then(msg => {
                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
                         var user = bot.users.get(event.d.user_id)
@@ -180,7 +156,7 @@ bot.on('raw', event => {
             if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
                 return
             } else {
-                bot.channels.get(event.d.channel_id).fetchMessage(event.d.message_id)
+                bot.channels.get(event.d.channel_id).messages.fetch(event.d.message_id)
                     .then(msg => {
                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
                         var user = bot.users.get(event.d.user_id)
@@ -193,13 +169,13 @@ bot.on('raw', event => {
 
 bot.on('messageReactionAdd', (reaction, user) => {
     var roleName = reaction.emoji.name
-    var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-    var role_membre = reaction.message.guild.roles.find(role => role.name.toLowerCase() == "membres")
+    var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+    var role_membre = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == "membres")
     if (role) {
-        var member = reaction.message.guild.members.find(member => member.id == user.id)
+        var member = reaction.message.guild.members.cache.find(member => member.id == user.id)
         if (member) {
             member.addRole(role.id)
-            if (!member.roles.find(role => role.name.toLowerCase() == "membres")) {
+            if (!member.roles.cache.find(role => role.name.toLowerCase() == "membres")) {
                 member.addRole(role_membre.id)
             }
         }
@@ -208,9 +184,9 @@ bot.on('messageReactionAdd', (reaction, user) => {
 
 bot.on('messageReactionRemove', (reaction, user) => {
     var roleName = reaction.emoji.name
-    var role = reaction.message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+    var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
     if (role) {
-        var member = reaction.message.guild.members.find(member => member.id == user.id)
+        var member = reaction.message.guild.members.cache.find(member => member.id == user.id)
         if (member) {
             member.removeRole(role.id)
         }
@@ -218,7 +194,7 @@ bot.on('messageReactionRemove', (reaction, user) => {
 })
 
 bot.on("guildMemberRemove", member => {
-    member.guild.channels.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
+    member.guild.channels.cache.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
 })
 
 bot.login(config.login)
