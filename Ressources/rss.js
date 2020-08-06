@@ -25,7 +25,7 @@ module.exports.rssFeed = function (rssChannel) {
                     if (desc.split('').length > 2048) {
                         desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
                     }
-                    var embedPN = new Discord.RichEmbed()
+                    var embedPN = new Discord.MessageEmbed()
                         .setTitle("**__Nouveau Patch Note__** : " + topicLastPostPN.title[0])
                         .setURL(topicLastPostPN.link[0])
                         .setColor("4360F7")
@@ -57,7 +57,7 @@ module.exports.rssFeed = function (rssChannel) {
                         desc = desc.split('').slice(0, 2037).join('') + " **[...]**"
                     }
 
-                    var embedWS = new Discord.RichEmbed()
+                    var embedWS = new Discord.MessageEmbed()
                         .setTitle("**__Nouveau Workshop__** : " + topicLastPostWS.title[0])
                         .setURL(topicLastPostWS.link[0])
                         .setColor("EC6826")

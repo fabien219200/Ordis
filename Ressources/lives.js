@@ -4,10 +4,10 @@ const axios = require('axios')
 var config
 
 try {
-    config = require('../../configLocal')
+    config = require('../configLocal')
 } catch { 
     try {
-        config = require('../../config')
+        config = require('../config')
     } catch (e) {
         console.error(e)
     }
@@ -30,7 +30,7 @@ module.exports.checkLive = async function (channel) {
             if (response.data.data.length != 0) {
                 if (new Date(response.data.data[0].started_at).valueOf() != lastStreamDate) {
                     lastStreamDate = response.data.data[0].started_at
-                    var embed = new Discord.RichEmbed()
+                    var embed = new Discord.MessageEmbed()
                         .setTitle('**' + response.data.data[0].user_name + ' est en stream :**')
                         .setDescription('***' + response.data.data[0].title + '***')
                         .setFooter('N\'oubliez pas de recuperer le twitch drop en regardant 30min du live.')
@@ -58,7 +58,7 @@ async function getTwitchToken() {
 async function getLastStreamDate(channel) {
     var message
     try {
-        message = await channel.fetchMessages({ limit: 1 })
+        message = await channel.messages.fetch({ limit: 1 })
     } catch (err) {
         console.error("err dans checkLive getlastStreamDate => " + err.message)
     }
