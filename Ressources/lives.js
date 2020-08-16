@@ -63,7 +63,7 @@ async function getLastStreamDate(channel) {
         console.error("err dans checkLive getlastStreamDate => " + err.message)
     }
     var lastMessage = message.first()
-    if (lastMessage.embeds.length != 0) {
+    if (lastMessage && lastMessage.embeds.length != 0) {
         return new Date(lastMessage.embeds[0].timestamp).valueOf()
     } else {
         return 0
