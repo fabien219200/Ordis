@@ -22,23 +22,22 @@ try {
 }
 
 const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
-console.log(discordCommands)
 const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
 
 for (const file of discordCommands) {
     const command = require(`./ordis_modules/Discord/${file}`);
-    console.log(require(`./ordis_modules/Discord/${file}`))
     bot.discordCommands.set(command.name.toLowerCase(), command);
 }
 
 for (const file of warframeCommands) {
     const command = require(`./ordis_modules/Warframe/${file}`);
-    console.log(require(`./ordis_modules/Warframe/${file}`))
     bot.warframeCommands.set(command.name.toLowerCase(), command);
 }
 
 const rss = require('./Ressources/rss')
 const lives = require('./Ressources/lives')
+
+const event = require('./ordis_modules/Discord/event')
 
 const prefixWarframe = "/"
 const prefixDiscord = "!"
@@ -52,7 +51,8 @@ bot.on('ready', () => {
     setInterval(cetusState, 60000)
     setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
     setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
-
+    event.getEmbededMessages(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "events"))
+    //TODO generate Dates and finish events
 })
 
 function cetusState() {
@@ -93,9 +93,9 @@ bot.on('message', message => {
         const discordArgs = message.content.slice(1).split(/ +/)
         const discordCommandName = discordArgs.shift().toLowerCase()
         //------------------------
-        console.log("Discord")
-        console.log(discordCommandName)
-        console.log(discordArgs)
+        // console.log("Discord")
+        // console.log(discordCommandName)
+        // console.log(discordArgs)
         //------------------------
         if (!bot.discordCommands.has(discordCommandName)) return
 
@@ -116,9 +116,9 @@ bot.on('message', message => {
         const warframeArgs = message.content.slice(1).split(/ +/)
         const warframeCommandName = warframeArgs.shift().toLowerCase()
         //------------------------
-        console.log("Warframe")
-        console.log(warframeCommandName)
-        console.log(warframeArgs)
+        // console.log("Warframe")
+        // console.log(warframeCommandName)
+        // console.log(warframeArgs)
         //------------------------
         if (!bot.warframeCommands.has(warframeCommandName)) return
 
