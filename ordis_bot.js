@@ -11,11 +11,11 @@ var globalGuild
 
 try {
     config = require('./configLocal')
-    globalGuild = 'Fab test BOT'
+    globalGuild = '477475842243428372'
 } catch {
     try {
         config = require('./config')
-        globalGuild = 'Warframe Kalldrax'
+        globalGuild = '623223246984052756'
     } catch (e) {
         console.error(e)
     }
@@ -47,12 +47,12 @@ var tabEmbeds = []
 
 bot.on('ready', () => {
     console.log("je suis connecté")
+    //console.log(bot.guilds.cache)
     bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
-    setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
-    event.getEmbededMessages(bot.guilds.cache.find(guild => guild.name == globalGuild).channels.cache.find(channel => channel.name == "events"))
-    //TODO generate Dates and finish events
+    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
+    event.getEmbededMessages(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "events"))
 })
 
 function cetusState() {
