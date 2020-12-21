@@ -170,18 +170,18 @@ bot.on('raw', event => {
 bot.on('voiceStateUpdate', (oldState, newState) => {
     console.log(oldState)
     if (newState.channel != null) {
-        if (newState.channel.name == "Vocal") {
+        if (newState.channel.id == "623542114017345606") {
             bot.guilds.cache.find(guild => guild.id == globalGuild).channels.create(newState.member.user.username, {
                 type: "voice",
             }).then(newVocalChannel => {
-                newVocalChannel.setParent("603229567406047243")
+                newVocalChannel.setParent("Vocal")
                 newState.member.edit({ channel: newVocalChannel })
             })
         }
     }
 
     if (oldState.channel != null) {
-        if (oldState.channel.name != "Vocal" && oldState.channel.members.size == 0) {
+        if (oldState.channel.id != "623542114017345606" && oldState.channel.members.size == 0) {
             oldState.channel.delete()
         }
     }
