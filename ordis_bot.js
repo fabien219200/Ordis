@@ -167,6 +167,27 @@ bot.on('raw', event => {
     }
 })
 
+bot.on('voiceStateUpdate', (oldState, newState) => {
+    console.log(oldState)
+    if (newState.channel != null) {
+        if (newState.channel.name == "Vocal") {
+            bot.guilds.cache.find(guild => guild.id == globalGuild).channels.create(newState.member.user.username, {
+                type: "voice",
+            }).then(newVocalChannel => {
+                newVocalChannel.setParent("603229567406047243")
+                newState.member.edit({ channel: newVocalChannel })
+            })
+        }
+    }
+
+    if (oldState.channel != null) {
+        if (oldState.channel.name != "Vocal" && oldState.channel.members.size == 0) {
+            oldState.channel.delete()
+        }
+    }
+})
+
+
 bot.on('messageReactionAdd', (reaction, user) => {
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
