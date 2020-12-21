@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const axios = require('axios')
 
 module.exports = {
-    name: 'Fissure',
+    name: 'Fissures',
     description: 'Gets fissures',
     execute(message) {
         axios.get("https://api.warframestat.us/pc/fr/fissures")
