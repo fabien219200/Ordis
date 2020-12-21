@@ -174,7 +174,7 @@ bot.on('voiceStateUpdate', (oldState, newState) => {
             bot.guilds.cache.find(guild => guild.id == globalGuild).channels.create(newState.member.user.username, {
                 type: "voice",
             }).then(newVocalChannel => {
-                newVocalChannel.setParent("Vocal")
+                newVocalChannel.setParent("707971311984574544")
                 newState.member.edit({ channel: newVocalChannel })
             })
         }
