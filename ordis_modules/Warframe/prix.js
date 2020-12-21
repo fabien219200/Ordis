@@ -2,82 +2,147 @@ const Discord = require('discord.js')
 const axios = require('axios')
 const fonctions = require('../../ordis_bot')
 
+var stringWfMarket
+var displayString
 module.exports = {
     name: 'Prix',
     description: 'Gets price of an Item from https://warframe.market/',
-    execute(message) {
+    async execute(message) {
         var string = message.content.split(" ").slice(1).join(" ")
         string = fonctions.majuscule(string, " ")
         var wiki = string.split(" ").join("_")
-        stringWfNexus = string.trim()
+        displayString = string.trim()
         stringWfMarket = wiki.toLowerCase().trim()
+        var primeResult = null
 
-        axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
-            .then((response) => {
-                var returnValues = prixMin(response)
-                let embed = new Discord.MessageEmbed()
-                    .setTitle("Prix (warframe.market)")
-                    .setURL("https://warframe.market/items/" + stringWfMarket)
-                    .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
-                    .setColor('#0101F2')
-                    .addField("Prix de vente minimum de " + string, ":white_small_square: Online in game : " + returnValues[0] + " (``/w " + returnValues[3] + "``)\n:white_small_square: Offline : " + returnValues[1] + " (``/w " + returnValues[4] + "``)")
-                    .addField("Prix d'achat maximum de " + string, ":white_small_square: Online in game : " + returnValues[2] + " (``/w " + returnValues[5] + "``)")
-                message.channel.send(embed)
-            }).catch(function (err) {
-                console.error("err dans platinum => " + err.message)
+        console.log(displayString)
+
+        primeResult = await getItemType(displayString.toLowerCase())
+        console.log(primeResult)
+        var type = primeResult[0]
+        var maxRank = primeResult[2]
+        var components = primeResult[1]
+
+        var prixArray = []
+
+        if (components != null) {
+            components = components.filter(item => item.uniqueName.includes("Recipes"))
+            components.push({ name: "Set" })
+            console.log(components)
+            for (var i = 0; i < components.length; i++) {
+                var stringWfMarketComponent = stringWfMarket + "_" + components[i].name.toLowerCase().split(" ").join("_")
+                await axios.get("https://api.warframe.market/v1/items/" + stringWfMarketComponent + "/orders?include=%5B%22item%22%5D")
+                    .then(response => {
+                        prixArray.push(prixMin(response, null, fonctions.majuscule(stringWfMarketComponent.split("_").join(" "), " ")))
+                    }).catch(e => {
+                        console.log(e)
+                    })
+            }
+        } else if (type == "Upgrade") {
+            for (var i = 0; i <= 1; i++) {
+                var rank = i * maxRank
+                await axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
+                    .then(response => {
+                        prixArray.push(prixMin(response, rank, `${displayString} (rank ${rank})`))
+                    }).catch(e => {
+                        console.log(e)
+                    })
+
+            }
+        } else {
+            await axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
+                .then(response => {
+                    prixArray.push(prixMin(response, rank, displayString))
+                }).catch(e => {
+                    console.log(e)
+                })
+        }
+        console.log(prixArray)
+        let embed = new Discord.MessageEmbed()
+        if (prixArray.length != 0) {
+            embed = new Discord.MessageEmbed()
+                .setTitle("Prix (warframe.market)")
+                .setURL("https://warframe.market/")
+                .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
+                .setColor('#0101F2')
+            prixArray.forEach(element => {
+                embed.addField(element[2], element[1] + " : " + element[0] + ` PL\n\`\`\`/w ${element[1]} Hi! I want to buy: ${element[2]} for ${element[0]} platinum. (warframe.market)\`\`\``)
             })
+        } else {
+            embed = new Discord.MessageEmbed()
+                .setTitle("Error")
+                .setURL("https://warframe.market/")
+                .setThumbnail("https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png")
+                .setColor('Red')
+                .addField("Une erreur est survenue", "Verifiez si l'item renseigné est tradeable, et si il a été correctement orthographié.\nSi oui, mentionnez un <@&" + message.guild.roles.cache.find(role => role.name == "Developper") + ">")
+        }
+        message.channel.send(embed)
     }
 }
 
-function prixMin(response) {
+async function getItemType(query) {
+    var response = await axios.get("https://api.warframestat.us/items/search/" + query)
+    var { data } = response
+    var type = null
+    var components = null
+    var maxRank = null
+
+    if (data.filter(entry => entry.uniqueName.includes("Prime")).length != 0) {
+        if (!stringWfMarket.includes("prime")) {
+            stringWfMarket += "_prime"
+            displayString += " Prime"
+        }
+    } else if (data.filter(entry => entry.uniqueName.includes("Vandal")).length != 0) {
+        if (!stringWfMarket.includes("vandal")) {
+            stringWfMarket += "_vandal"
+            displayString += " Vandal"
+        }
+    } else if (data.filter(entry => entry.uniqueName.includes("Wraith")).length != 0) {
+        if (!stringWfMarket.includes("wraith")) {
+            stringWfMarket += "_wraith"
+            displayString += " Wraith"
+        }
+    } else if (data.filter(entry => entry.uniqueName.includes("VoidTrader")).length != 0) {
+        if (!stringWfMarket.includes("prisma")) {
+            stringWfMarket = "prisma_" + stringWfMarket
+            displayString = "Prisma " + displayString
+        }
+    }
+
+
+    if (data.filter(entry => entry.uniqueName.startsWith("/Lotus/Powersuits/") && entry.name.includes(displayString)).length != 0) {
+        var entry = data.filter(entry => entry.uniqueName.startsWith("/Lotus/Powersuits/") && entry.name.includes(displayString))[0]
+        type = "Warframe"
+        var { components } = entry
+    } else if (data.filter(entry => (entry.uniqueName.startsWith("/Lotus/Weapons/") && entry.name.includes(displayString))).length != 0) {
+        var entry = data.filter(entry => entry.uniqueName.startsWith("/Lotus/Weapons/") && entry.name.includes(displayString))[0]
+        type = "Arme"
+        var { components } = entry
+    }
+    else if (data.filter(entry => ((entry.uniqueName.startsWith("/Lotus/Upgrades/CosmeticEnhancers/") || entry.uniqueName.startsWith("/Lotus/Upgrades/Mods/")) && entry.name.includes(displayString))).length != 0) {
+        var entry = data.filter(entry => (!entry.uniqueName.includes("/Beginner/") && ((entry.uniqueName.startsWith("/Lotus/Upgrades/CosmeticEnhancers/") || entry.uniqueName.startsWith("/Lotus/Upgrades/Mods/"))) && entry.name.includes(displayString)))[0]
+        type = "Upgrade"
+        maxRank = entry.levelStats.length - 1
+    } else {
+        type = "None"
+    }
+    return [type, components, maxRank]
+}
+
+function prixMin(response, rank, itemName) {
     var orders = response.data.payload.orders
-    var prix1init, prix2init, prix3init, user1init, user2init, user3init, i = 0
-    while ((!prix1init || !prix2init || !prix3init) && i != orders.length) {
-        if (orders[i].platform == "pc" && orders[i].region === "en") {
-            if (orders[i].order_type === "sell") {
-                if (orders[i].user.status == "ingame" && !prix1init) {
-                    prix1init = orders[i].platinum
-                    user1init = orders[i].user.ingame_name
-                } else if (orders[i].user.status == "offline" && !prix2init) {
-                    prix2init = orders[i].platinum
-                    user2init = orders[i].user.ingame_name
-                }
-            } else if (orders[i].order_type === "buy" && !prix3init) {
-                if (orders[i].user.status == "ingame") {
-                    prix3init = orders[i].platinum
-                    user3init = orders[i].user.ingame_name
-                }
-            }
-        }
-        i++
+    var prix = null
+    var user = null
+    orders = orders.filter(order => order.platform == "pc" && order.region == "en" && order.order_type == "sell" && order.user.status == "ingame")
+    if (rank != null) {
+        orders = orders.filter(order => order.mod_rank == rank)
     }
-
-    var prix = [prix1init, prix2init, prix3init] //[0] = prixmin, [1] = prixminoffline, [2] = prixmax
-    var user = [user1init, user2init, user3init] //[0] = usersell, [1] = userselloffline, [2] = userbuy
-
     for (var i = 0; i < orders.length; i++) {
-        if (orders[i].platform == "pc" && orders[i].region === "en") {
-            if (orders[i].order_type === "sell") {
-                if (orders[i].user.status == "ingame") {
-                    if (orders[i].platinum < prix[0]) {
-                        prix[0] = orders[i].platinum
-                        user[0] = orders[i].user.ingame_name
-                    }
-                } else if (orders[i].user.status == "offline") {
-                    if (orders[i].platinum < prix[1]) {
-                        prix[1] = orders[i].platinum
-                        user[1] = orders[i].user.ingame_name
-                    }
-                }
-            } else if (orders[i].order_type === "buy") {
-                if (orders[i].user.status == "ingame") {
-                    if (orders[i].platinum > prix[2]) {
-                        prix[2] = orders[i].platinum
-                        user[2] = orders[i].user.ingame_name
-                    }
-                }
-            }
+        if ((orders[i].platinum < prix && orders[i]) || prix == null) {
+            //console.log(orders[i])
+            prix = orders[i].platinum
+            user = orders[i].user.ingame_name
         }
     }
-    return [prix[0], prix[1], prix[2], user[0], user[1], user[2]]
+    return [prix, user, itemName]
 }
