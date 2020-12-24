@@ -167,21 +167,23 @@ bot.on('raw', event => {
     }
 })
 
-bot.on('voiceStateUpdate', (oldState, newState) => {
+bot.on('voiceStateUpdate',async (oldState, newState) => {
     console.log(oldState)
     if (newState.channel != null) {
-        if (newState.channel.id == "623542114017345606") {
+        if (newState.channel.name == "Creation de salon") {
             bot.guilds.cache.find(guild => guild.id == globalGuild).channels.create(newState.member.user.username, {
                 type: "voice",
             }).then(newVocalChannel => {
-                newVocalChannel.setParent("707971311984574544")
-                newState.member.edit({ channel: newVocalChannel })
+                newVocalChannel.setParent(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "Creation de salon").parent)
+                .then(() => {
+                    newState.member.edit({ channel: newVocalChannel })
+                })
             })
         }
     }
 
     if (oldState.channel != null) {
-        if (oldState.channel.id != "623542114017345606" && oldState.channel.members.size == 0) {
+        if (oldState.channel.name != "Creation de salon" && oldState.channel.members.size == 0) {
             oldState.channel.delete()
         }
     }
