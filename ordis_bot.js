@@ -167,17 +167,26 @@ bot.on('raw', event => {
     }
 })
 
-bot.on('voiceStateUpdate',async (oldState, newState) => {
-    console.log(oldState)
+bot.on('voiceStateUpdate', async (oldState, newState) => {
+    //console.log(oldState)
     if (newState.channel != null) {
+        console.log("channel not null")
         if (newState.channel.name == "Creation de salon") {
-            bot.guilds.cache.find(guild => guild.id == globalGuild).channels.create(newState.member.user.username, {
+            console.log("channel name is 'Creation de salon'")
+            newState.guild.channels.create(newState.member.user.username, {
                 type: "voice",
             }).then(newVocalChannel => {
-                newVocalChannel.setParent(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "Creation de salon").parent)
-                .then(() => {
-                    newState.member.edit({ channel: newVocalChannel })
-                })
+                console.log("vocal created")
+                newVocalChannel.setParent(newState.guild.channels.cache.find(channel => channel.name == "Creation de salon").parent)
+                    .then(() => {
+                        console.log("parent set")
+                        newState.member.edit({ channel: newVocalChannel })
+                        console.log("user state set")
+                    }).catch(e => {
+                        console.log(e)
+                    })
+            }).catch(e => {
+                console.log(e)
             })
         }
     }
