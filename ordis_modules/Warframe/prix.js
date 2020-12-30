@@ -66,7 +66,7 @@ module.exports = {
                 .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
                 .setColor('#0101F2')
             prixArray.forEach(element => {
-                embed.addField(element[2], element[1] + " : " + element[0] + ` PL\n\`\`\`/w ${element[1]} Hi! I want to buy: ${element[2]} for ${element[0]} platinum. (warframe.market)\`\`\``)
+                embed.addField(element[2], element[1].replace("_", "\\_") + " : " + element[0] + ` PL\n\`\`\`/w ${element[1]} Hi! I want to buy: ${element[2]} for ${element[0]} platinum. (warframe.market)\`\`\``)
             })
         } else {
             embed = new Discord.MessageEmbed()
