@@ -39,15 +39,24 @@ module.exports = {
                     })
             }
         } else if (type == "Upgrade") {
-            for (var i = 0; i <= 1; i++) {
-                var rank = i * maxRank
+            if (displayString.includes("Riven")) {
                 await axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
                     .then(response => {
-                        prixArray.push(prixMin(response, rank, `${displayString} (rank ${rank})`))
+                        prixArray.push(prixMin(response, null, `${displayString}`))
                     }).catch(e => {
                         console.log(e)
                     })
+            } else {
+                for (var i = 0; i <= 1; i++) {
+                    var rank = i * maxRank
+                    await axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
+                        .then(response => {
+                            prixArray.push(prixMin(response, rank, `${displayString} (rank ${rank})`))
+                        }).catch(e => {
+                            console.log(e)
+                        })
 
+                }
             }
         } else {
             await axios.get("https://api.warframe.market/v1/items/" + stringWfMarket + "/orders?include=%5B%22item%22%5D")
@@ -66,7 +75,11 @@ module.exports = {
                 .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/e/e7/PlatinumLarge.png/revision/latest?cb=20130728181159")
                 .setColor('#0101F2')
             prixArray.forEach(element => {
-                embed.addField(element[2], element[1].replace("_", "\\_") + " : " + element[0] + ` PL\n\`\`\`/w ${element[1]} Hi! I want to buy: ${element[2]} for ${element[0]} platinum. (warframe.market)\`\`\``)
+                if (element[0] == null || element[1] == null) {
+                    embed.addField(element[2], "```No online ingame orders found !\nTry again later :)```")
+                } else {
+                    embed.addField(element[2], element[1].replace("_", "\\_") + " : " + element[0] + ` PL\n\`\`\`/w ${element[1]} Hi! I want to buy: ${element[2]} for ${element[0]} platinum. (warframe.market)\`\`\``)
+                }
             })
         } else {
             embed = new Discord.MessageEmbed()
@@ -86,43 +99,47 @@ async function getItemType(query) {
     var type = null
     var components = null
     var maxRank = null
-
-    if (data.filter(entry => entry.uniqueName.includes("Prime")).length != 0) {
+    if (data.filter(entry => entry.category != "Skins" && entry.uniqueName.includes("Prime")).length != 0) {
         if (!stringWfMarket.includes("prime")) {
             stringWfMarket += "_prime"
             displayString += " Prime"
         }
-    } else if (data.filter(entry => entry.uniqueName.includes("Vandal")).length != 0) {
+    } else if (data.filter(entry => entry.category != "Skins" && entry.uniqueName.includes("Vandal")).length != 0) {
         if (!stringWfMarket.includes("vandal")) {
             stringWfMarket += "_vandal"
             displayString += " Vandal"
         }
-    } else if (data.filter(entry => entry.uniqueName.includes("Wraith")).length != 0) {
+    } else if (data.filter(entry => entry.category != "Skins" && entry.uniqueName.includes("Wraith")).length != 0) {
         if (!stringWfMarket.includes("wraith")) {
             stringWfMarket += "_wraith"
             displayString += " Wraith"
         }
-    } else if (data.filter(entry => entry.uniqueName.includes("VoidTrader")).length != 0) {
+    } else if (data.filter(entry => entry.category != "Skins" && entry.uniqueName.match(/VoidTrader|Prisma/)).length != 0) {
         if (!stringWfMarket.includes("prisma")) {
             stringWfMarket = "prisma_" + stringWfMarket
             displayString = "Prisma " + displayString
         }
     }
 
-
-    if (data.filter(entry => entry.uniqueName.startsWith("/Lotus/Powersuits/") && entry.name.includes(displayString)).length != 0) {
-        var entry = data.filter(entry => entry.uniqueName.startsWith("/Lotus/Powersuits/") && entry.name.includes(displayString))[0]
+    //TODO use category instead of uniqueName
+    if (data.filter(entry => entry.category.match(/Warframes|Archwing|Sentinels/) && entry.name.includes(displayString)).length != 0) {
+        var entry = data.filter(entry => entry.category.match(/Warframes|Archwing|Sentinels/) && entry.name.includes(displayString))[0]
         type = "Warframe"
         var { components } = entry
-    } else if (data.filter(entry => (entry.uniqueName.startsWith("/Lotus/Weapons/") && entry.name.includes(displayString))).length != 0) {
-        var entry = data.filter(entry => entry.uniqueName.startsWith("/Lotus/Weapons/") && entry.name.includes(displayString))[0]
+    } else if (data.filter(entry => entry.category.match(/Primary|Secondary|Melee|Arch-Melee/) && entry.name.includes(displayString)).length != 0) {
+        var entry = data.filter(entry => entry.category.match(/Primary|Secondary|Melee|Arch-Melee/) && entry.name.includes(displayString))[0]
         type = "Arme"
         var { components } = entry
     }
-    else if (data.filter(entry => ((entry.uniqueName.startsWith("/Lotus/Upgrades/CosmeticEnhancers/") || entry.uniqueName.startsWith("/Lotus/Upgrades/Mods/")) && entry.name.includes(displayString))).length != 0) {
-        var entry = data.filter(entry => (!entry.uniqueName.includes("/Beginner/") && ((entry.uniqueName.startsWith("/Lotus/Upgrades/CosmeticEnhancers/") || entry.uniqueName.startsWith("/Lotus/Upgrades/Mods/"))) && entry.name.includes(displayString)))[0]
+    else if (data.filter(entry => (entry.category.match(/Arcanes|Mods/) && entry.name.includes(displayString))).length != 0) {
+        var entry = data.filter(entry => (!entry.uniqueName.includes("/Beginner/") && (entry.category.match(/Arcanes|Mods/) && entry.name.includes(displayString))))[0]
         type = "Upgrade"
-        maxRank = entry.levelStats.length - 1
+        if (entry.name.includes("Riven")) {
+            stringWfMarket += "_(veiled)"
+            displayString += " (Veiled)"
+        } else {
+            maxRank = entry.levelStats.length - 1
+        }
     } else {
         type = "None"
     }
