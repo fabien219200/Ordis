@@ -9,6 +9,9 @@ module.exports = {
     description: 'Gets price of an Item from https://warframe.market/',
     async execute(message) {
         var string = message.content.split(" ").slice(1).join(" ")
+        if (string.match(/\w+ \w\d/)) {
+            string += " Intact"
+        }
         string = fonctions.majuscule(string, " ")
         var wiki = string.split(" ").join("_")
         displayString = string.trim()
@@ -99,7 +102,7 @@ async function getItemType(query) {
     var type = null
     var components = null
     var maxRank = null
-    if (data.filter(entry => entry.category != "Skins" && entry.uniqueName.includes("Prime")).length != 0) {
+    if (data.filter(entry => entry.category != "Skins" && entry.category != 'Relics' && entry.uniqueName.includes("Prime")).length != 0) {
         if (!stringWfMarket.includes("prime")) {
             stringWfMarket += "_prime"
             displayString += " Prime"
