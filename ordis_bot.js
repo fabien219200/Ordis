@@ -48,7 +48,7 @@ var tabEmbeds = []
 bot.on('ready', () => {
     console.log("je suis connecté")
     //console.log(bot.guilds.cache)
-    bot.user.setActivity(prefixDiscord + "info", { type: "WATCHING" })
+    bot.user.setActivity("Initialisation", { type: "WATCHING" })
     setInterval(cetusState, 60000)
     setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
     setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
@@ -56,27 +56,17 @@ bot.on('ready', () => {
 })
 
 function cetusState() {
-    var message
+    var message = "Cetus => "
     axios.get('https://api.warframestat.us/pc/cetusCycle')
         .then((response) => {
             if (response.data.isDay) {
-                message = "☀: " + response.data.shortString.split(" ")[0] + " | "
+                message += `☀:  ${(response.data.timeLeft.includes("m") ? response.data.timeLeft.match(/((\d*h )*(\d*m)*)/)[0] : response.data.timeLeft)}`
             } else {
-                message = "🌑: " + response.data.shortString.split(" ")[0] + " | "
+                message += `🌑:  ${(response.data.timeLeft.includes("m") ? response.data.timeLeft.match(/((\d*h )*(\d*m)*)/)[0] : response.data.timeLeft)}`
             }
-            axios.get('https://api.warframestat.us/pc/earthCycle')
-                .then((response2) => {
-                    if (response2.data.isDay) {
-                        message = message + "☀(T): " + response2.data.timeLeft.split("m")[0] + "m"
-                    } else {
-                        message = message + "🌑(T): " + response2.data.timeLeft.split("m")[0] + "m"
-                    }
-                    bot.user.setActivity(message, { type: "WATCHING" })
-                }).catch((err) => {
-                    console.error("err dans cetusState earthCycle => " + err.message)
-                })
+            bot.user.setActivity(message, { type: "WATCHING" })
         }).catch((err) => {
-            console.error("err dans cetusState cetusCycle => " + err.message)
+            console.error("err dans cetusState => " + err.message)
         })
 }
 
