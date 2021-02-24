@@ -29,17 +29,37 @@ module.exports = {
         var prixArray = []
 
         if (components != null) {
-            components = components.filter(item => item.uniqueName.includes("Recipes"))
-            components.push({ name: "Set" })
-            console.log(components)
-            for (var i = 0; i < components.length; i++) {
-                var stringWfMarketComponent = stringWfMarket + "_" + components[i].name.toLowerCase().split(" ").join("_")
-                await axios.get("https://api.warframe.market/v1/items/" + stringWfMarketComponent + "/orders?include=%5B%22item%22%5D")
-                    .then(response => {
-                        prixArray.push(prixMin(response, null, fonctions.majuscule(stringWfMarketComponent.split("_").join(" "), " ")))
-                    }).catch(e => {
-                        console.log(e)
-                    })
+            if (type == "SpaceGuns" && components.filter(component => component.uniqueName.includes("Gameplay")).length != 0) {
+                //Check if displayName is in component.name
+                components = components.filter(item => item.uniqueName.match(/Gameplay/))
+                components.push({ name: "Set" })
+                console.log(components)
+                for (var i = 0; i < components.length; i++) {
+                    if (components[i].name.toLowerCase().includes(displayString.toLowerCase())) {
+                        var stringWfMarketComponent = components[i].name.replace(" ", "_").toLowerCase()
+                    } else {
+                        var stringWfMarketComponent = stringWfMarket + "_" + components[i].name.toLowerCase().split(" ").join("_")
+                    }
+                    await axios.get("https://api.warframe.market/v1/items/" + stringWfMarketComponent + "/orders?include=%5B%22item%22%5D")
+                        .then(response => {
+                            prixArray.push(prixMin(response, null, fonctions.majuscule(stringWfMarketComponent.split("_").join(" "), " ")))
+                        }).catch(e => {
+                            console.log(e)
+                        })
+                }
+            } else {
+                components = components.filter(item => item.uniqueName.match(/Recipes/))
+                components.push({ name: "Set" })
+                console.log(components)
+                for (var i = 0; i < components.length; i++) {
+                    var stringWfMarketComponent = stringWfMarket + "_" + components[i].name.toLowerCase().replace(" ", "_")
+                    await axios.get("https://api.warframe.market/v1/items/" + stringWfMarketComponent + "/orders?include=%5B%22item%22%5D")
+                        .then(response => {
+                            prixArray.push(prixMin(response, null, fonctions.majuscule(stringWfMarketComponent.split("_").join(" "), " ")))
+                        }).catch(e => {
+                            console.log(e)
+                        })
+                }
             }
         } else if (type == "Upgrade") {
             if (displayString.includes("Riven")) {
@@ -102,6 +122,9 @@ async function getItemType(query) {
     var type = null
     var components = null
     var maxRank = null
+    for (var i = 0; i < data.length; i++) {
+        console.log(data[i].productCategory)
+    }
     if (data.filter(entry => entry.category != "Skins" && entry.category != 'Relics' && entry.uniqueName.includes("Prime")).length != 0) {
         if (!stringWfMarket.includes("prime")) {
             stringWfMarket += "_prime"
@@ -123,9 +146,14 @@ async function getItemType(query) {
             displayString = "Prisma " + displayString
         }
     }
-
-    //TODO use category instead of uniqueName
-    if (data.filter(entry => entry.category.match(/Warframes|Archwing|Sentinels/) && entry.name.includes(displayString)).length != 0) {
+    if (data.filter(entry => entry.hasOwnProperty("productCategory") && entry.productCategory.includes("SpaceGuns")).length != 0) {
+        var dataProductCategory = data.filter(entry => entry.hasOwnProperty("productCategory") && entry.productCategory.includes("SpaceGuns"))
+        if (dataProductCategory.filter(entry => entry.productCategory.match(/SpaceGuns/) && entry.name.includes(displayString)).length != 0) {
+            entry = dataProductCategory.filter(entry => entry.productCategory.match(/SpaceGuns/) && entry.name.includes(displayString))[0]
+            type = "SpaceGuns"
+            var { components } = entry
+        }
+    } else if (data.filter(entry => entry.category.match(/Warframes|Archwing|Sentinels/) && entry.name.includes(displayString)).length != 0) {
         var entry = data.filter(entry => entry.category.match(/Warframes|Archwing|Sentinels/) && entry.name.includes(displayString))[0]
         type = "Warframe"
         var { components } = entry
@@ -133,15 +161,18 @@ async function getItemType(query) {
         var entry = data.filter(entry => entry.category.match(/Primary|Secondary|Melee|Arch-Melee/) && entry.name.includes(displayString))[0]
         type = "Arme"
         var { components } = entry
-    }
-    else if (data.filter(entry => (entry.category.match(/Arcanes|Mods/) && entry.name.includes(displayString))).length != 0) {
+    } else if (data.filter(entry => (entry.category.match(/Arcanes|Mods/) && entry.name.includes(displayString))).length != 0) {
         var entry = data.filter(entry => (!entry.uniqueName.includes("/Beginner/") && (entry.category.match(/Arcanes|Mods/) && entry.name.includes(displayString))))[0]
         type = "Upgrade"
         if (entry.name.includes("Riven")) {
             stringWfMarket += "_(veiled)"
             displayString += " (Veiled)"
         } else {
-            maxRank = entry.levelStats.length - 1
+            if (entry.category.match(/Arcanes/)) {
+                maxRank = entry.levelStats.length - 1
+            } else if (entry.category.match(/Mods/)) {
+                maxRank = entry.fusionLimit
+            }
         }
     } else {
         type = "None"
