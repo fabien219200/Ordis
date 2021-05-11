@@ -1,48 +1,45 @@
 const Discord = require('discord.js')
-const bot = new Discord.Client()
-bot.discordCommands = new Discord.Collection();
-bot.warframeCommands = new Discord.Collection();
+
+const bot = new Discord.Client({
+    intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES,Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, Discord.Intents.FLAGS.GUILD_VOICE_STATES]
+})
+bot.commands = new Discord.Collection();
 
 const axios = require('axios')
 const fs = require('fs')
+require('dotenv').config()
 
-var config
-var globalGuild
+// try {
+//     config = require('./configLocal')
+//     globalGuild = '477475842243428372'
+// } catch {
+//     try {
+//         config = require('./config')
+//         globalGuild = '623223246984052756'
+//     } catch (e) {
+//         console.error(e)
+//     }
+// }
 
-try {
-    config = require('./configLocal')
-    globalGuild = '477475842243428372'
-} catch {
-    try {
-        config = require('./config')
-        globalGuild = '623223246984052756'
-    } catch (e) {
-        console.error(e)
-    }
-}
+globalGuild = '477475842243428372'
+
 
 const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
 const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
 
 for (const file of discordCommands) {
     const command = require(`./ordis_modules/Discord/${file}`);
-    bot.discordCommands.set(command.name.toLowerCase(), command);
+    bot.commands.set(command.name.toLowerCase(), command);
 }
 
 for (const file of warframeCommands) {
     const command = require(`./ordis_modules/Warframe/${file}`);
-    bot.warframeCommands.set(command.name.toLowerCase(), command);
+    bot.commands.set(command.name.toLowerCase(), command);
 }
 
 const rss = require('./Ressources/rss')
 const lives = require('./Ressources/lives')
-
 const event = require('./ordis_modules/Discord/event')
-
-const prefixWarframe = "/"
-const prefixDiscord = "!"
-
-var tabEmbeds = []
 
 
 bot.on('ready', () => {
@@ -50,7 +47,7 @@ bot.on('ready', () => {
     //console.log(bot.guilds.cache)
     bot.user.setActivity("Initialisation", { type: "WATCHING" })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 30000)
     setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
     event.getEmbededMessages(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "events"))
 })
@@ -72,66 +69,60 @@ function cetusState() {
 
 
 
-bot.on('message', message => {
+// bot.on('message', message => {
+//     console.log(message)
+//     if (message.content.toLowerCase().startsWith('salut ordis')) {
+//         message.reply("Salut cher ami")
+//     }
 
-    if (message.content.toLowerCase().startsWith('salut ordis')) {
-        message.reply("Salut cher ami")
+
+//     if (message.content.startsWith(prefixWarframe) && !message.author.bot) {
+
+//         const warframeArgs = message.content.slice(1).split(/ +/)
+//         const warframeCommandName = warframeArgs.shift().toLowerCase()
+//         //------------------------
+//         // console.log("Warframe")
+//         // console.log(warframeCommandName)
+//         // console.log(warframeArgs)
+//         //------------------------
+//         if (!bot.commands.has(warframeCommandName)) return
+
+//         const warframeCommand = bot.commands.get(warframeCommandName.toLowerCase())
+
+//         try {
+//             warframeCommand.execute(message, warframeArgs)
+//         } catch {
+//             message.reply("Error")
+//         }
+//     }
+
+// })
+
+bot.on('interaction', async interaction => {
+    // If the interaction isn't a slash command, return
+    if (!interaction.isCommand()) return;
+    console.log(interaction)
+    if (interaction.commandName != "clear") {
+        await interaction.defer()
     }
-
-    if (message.content.startsWith(prefixDiscord) && !message.author.bot) {
-
-        const discordArgs = message.content.slice(1).split(/ +/)
-        const discordCommandName = discordArgs.shift().toLowerCase()
-        //------------------------
-        // console.log("Discord")
-        // console.log(discordCommandName)
-        // console.log(discordArgs)
-        //------------------------
-        if (!bot.discordCommands.has(discordCommandName)) return
-
-        const discordCommand = bot.discordCommands.get(discordCommandName.toLowerCase())
-
-        try {
-            discordCommand.execute(message, discordArgs)
-        } catch (e) {
-            message.reply("Error : " + e)
-        }
+    try {
+        bot.commands.get(interaction.commandName).execute(interaction)
+    } catch (e) {
+        console.log(e)
     }
-
-    //----------------------------------------------------------------------------------------
-
-
-    if (message.content.startsWith(prefixWarframe) && !message.author.bot) {
-
-        const warframeArgs = message.content.slice(1).split(/ +/)
-        const warframeCommandName = warframeArgs.shift().toLowerCase()
-        //------------------------
-        // console.log("Warframe")
-        // console.log(warframeCommandName)
-        // console.log(warframeArgs)
-        //------------------------
-        if (!bot.warframeCommands.has(warframeCommandName)) return
-
-        const warframeCommand = bot.warframeCommands.get(warframeCommandName.toLowerCase())
-
-        try {
-            warframeCommand.execute(message, warframeArgs)
-        } catch {
-            message.reply("Error")
-        }
-    }
-
 })
 
-
+//PB DE CACHE
 bot.on('raw', event => {
     var eventName = event.t
+    //console.log(event)
     if (eventName == 'MESSAGE_REACTION_ADD') {
-        if (event.d.channel_id === '594550466109636609') {
-            if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
+        if (event.d.channel_id === '616684719710404645') {
+            console.log(bot.channels.cache.get(event.d.channel_id).messages)
+            if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
                 return
             } else {
-                bot.channels.get(event.d.channel_id).messages.fetch(event.d.message_id)
+                bot.channels.cache.get(event.d.channel_id).messages.fetch(event.d.message_id)
                     .then(msg => {
                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
                         var user = bot.users.get(event.d.user_id)
@@ -142,11 +133,11 @@ bot.on('raw', event => {
     }
 
     if (eventName == 'MESSAGE_REACTION_REMOVE') {
-        if (event.d.channel_id === '594550466109636609') {
-            if (bot.channels.get(event.d.channel_id).messages.has(event.d.message_id)) {
+        if (event.d.channel_id === '616684719710404645') {
+            if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
                 return
             } else {
-                bot.channels.get(event.d.channel_id).messages.fetch(event.d.message_id)
+                bot.channels.cache.get(event.d.channel_id).messages.cache.fetch(event.d.message_id)
                     .then(msg => {
                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
                         var user = bot.users.get(event.d.user_id)
@@ -190,15 +181,16 @@ bot.on('voiceStateUpdate', async (oldState, newState) => {
 
 
 bot.on('messageReactionAdd', (reaction, user) => {
+    console.log("Add role initiated !")
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
-    var role_membre = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == "membres")
+    var role_kalliance = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == "kalliance")
     if (role) {
         var member = reaction.message.guild.members.cache.find(member => member.id == user.id)
         if (member) {
             member.addRole(role.id)
-            if (!member.roles.cache.find(role => role.name.toLowerCase() == "membres")) {
-                member.addRole(role_membre.id)
+            if (!member.roles.cache.find(role => role.name.toLowerCase() == "kalliance")) {
+                member.addRole(role_kalliance.id)
             }
         }
     }
@@ -219,7 +211,7 @@ bot.on("guildMemberRemove", member => {
     member.guild.channels.cache.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
 })
 
-bot.login(config.login)
+bot.login(process.env.BOT_TOKEN)
 
 /**
  * Returns the message with an uppercase at the beginning of each word.
