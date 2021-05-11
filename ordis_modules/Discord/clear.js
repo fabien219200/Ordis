@@ -3,25 +3,45 @@
 module.exports = {
     name: 'Clear',
     description: 'Clears messages',
-    execute(message) {
+    async execute(interaction) {
         //On check s'il ne s'agit pas d'un message privé
-        if (message.guild) {
+        if (interaction.guild) {
             //On check si l'utilisateur a les permissions
-            if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-                message.channel.send("Vous n'avez pas la permission d'effectuer cette commande. Veuillez vous référer aux membres ayant la permission \"Gerer les messages\".")
+            if (!interaction.member.permissionsIn(interaction.channel).has("MANAGE_MESSAGES")) {
+                interaction.reply("Vous n'avez pas la permission d'effectuer cette commande. Veuillez vous référer aux membres ayant la permission \"Gerer les messages\".")
             } else {
                 //On recupere le nombre de messages a effacer
-                var effacer = message.content.split(" ")
+                var nbDeleteRequest = interaction.options.find(option => option.name == "number").value
                 //On verifie si le nombre specifié ne depasse pas 100. Si oui, on efface 100 et on recommence avec le meme nombre - 100
-                if (parseInt(effacer[1]) > 99) {
-                    message.channel.bulkDelete(100)
-                    effacer[1] = effacer[1] - 100
-                } else {
-                    message.channel.bulkDelete(parseInt(effacer[1]) + 1)
+                var isError = false
+                while (nbDeleteRequest > 99 && !isError) {
+                    await interaction.channel.bulkDelete(100).catch(error => {
+                        interaction.reply(`Une erreur est survenue pour la raison suivante : \n\`\`\`${error}\`\`\``)
+                        isError = true
+                    })
+                    nbDeleteRequest = nbDeleteRequest - 100
                 }
+                if (!isError) {
+                    await interaction.channel.bulkDelete(nbDeleteRequest).catch(error => {
+                        interaction.reply(`Une erreur est survenue pour la raison suivante : \n\`\`\`${error}\`\`\``)
+                        isError = true
+                    })
+                    if (!isError) {
+                        interaction.reply(`${nbDeleteRequest} message(s) supprimé(s) !`)
+                    }
+                }
+                // interaction.channel.messages.fetch({ limit: parseInt(nbDeleteRequest) + 1 })
+                //     .then(messagesArray => {
+                //         messagesArray.forEach(currentMessage => {
+                //             currentMessage.delete()
+                //         })
+                //         //Return "Messages deleted"
+                //     }).catch(err => {
+                //         //Return "Deletion failed"
+                //     })
             }
         } else {
-            message.channel.send("Vous n'etes actellement pas sur un serveur")
+            interaction.channel.send("Vous n'etes actellement pas sur un serveur")
         }
     }
 }
