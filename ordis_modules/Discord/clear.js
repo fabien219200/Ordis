@@ -30,15 +30,6 @@ module.exports = {
                         interaction.reply(`${nbDeleteRequest} message(s) supprimé(s) !`)
                     }
                 }
-                // interaction.channel.messages.fetch({ limit: parseInt(nbDeleteRequest) + 1 })
-                //     .then(messagesArray => {
-                //         messagesArray.forEach(currentMessage => {
-                //             currentMessage.delete()
-                //         })
-                //         //Return "Messages deleted"
-                //     }).catch(err => {
-                //         //Return "Deletion failed"
-                //     })
             }
         } else {
             interaction.channel.send("Vous n'etes actellement pas sur un serveur")
