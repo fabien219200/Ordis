@@ -1,3 +1,4 @@
 node_modules
 configLocal.js
 .vscode
+.env
