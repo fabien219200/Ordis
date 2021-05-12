@@ -7,8 +7,8 @@ module.exports = {
         var authorUser = interaction.member
 
         if (interaction.options.find(option => option.name == "user")) {
-            if (!authorUser.roles.cache.find(roles => roles.name.toLowerCase() == "moderateur")) {
-                interaction.channel.send("Permission denied")
+            if (!authorUser.permissionsIn(interaction.channel).has("MANAGE_ROLES")) {
+                interaction.reply("Vous n'avez pas la permission d'effectuer cette commande. Veuillez vous référer aux membres ayant la permission \"Gérer les roles\".")
                 return
             }
             var option = interaction.options.find(option => option.name == "user").options.find(option => option.name == "user")
@@ -27,7 +27,7 @@ module.exports = {
                 .addField("Pseudo original : ", user.tag)
                 .addField("Roles : ", member.roles.cache.map(roles => ":white_small_square:" + roles.name))
                 .addField("Rôle le plus élevé : ", member.roles.highest.name)
-                .addField("Dernier message envoyé : ", member.lastMessage || "**Aucun message envoyé pour le moment**")
+                //.addField("Dernier message envoyé : ", member.lastMessage || "**Aucun message envoyé pour le moment**")
                 .addField("Date d'entrée sur le serveur : ", date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear())
                 .addField("Status : ", user.presence.status)
                 .addField("Jeu : ", presence)
