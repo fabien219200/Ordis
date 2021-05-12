@@ -1,7 +1,13 @@
 const Discord = require('discord.js')
 
 const bot = new Discord.Client({
-    intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES,Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, Discord.Intents.FLAGS.GUILD_VOICE_STATES]
+    intents: [
+        Discord.Intents.FLAGS.GUILDS,
+        Discord.Intents.FLAGS.GUILD_MESSAGES,
+        Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+        Discord.Intents.FLAGS.GUILD_VOICE_STATES,
+        Discord.Intents.FLAGS.GUILD_PRESENCES 
+    ]
 })
 bot.commands = new Discord.Collection();
 
@@ -9,20 +15,7 @@ const axios = require('axios')
 const fs = require('fs')
 require('dotenv').config()
 
-// try {
-//     config = require('./configLocal')
-//     globalGuild = '477475842243428372'
-// } catch {
-//     try {
-//         config = require('./config')
-//         globalGuild = '623223246984052756'
-//     } catch (e) {
-//         console.error(e)
-//     }
-// }
-
 globalGuild = '477475842243428372'
-
 
 const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
 const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
