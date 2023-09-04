@@ -2,20 +2,21 @@ const Discord = require('discord.js')
 
 const bot = new Discord.Client({
     intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MESSAGES,
-        Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Discord.Intents.FLAGS.GUILD_VOICE_STATES,
-        Discord.Intents.FLAGS.GUILD_PRESENCES 
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMessageReactions,
+        Discord.GatewayIntentBits.GuildVoiceStates,        
+        Discord.GatewayIntentBits.GuildPresences,        
     ]
 })
-bot.commands = new Discord.Collection();
+
 
 const axios = require('axios')
 const fs = require('fs')
 require('dotenv').config()
 
-globalGuild = '477475842243428372'
+bot.commands = new Discord.Collection();
+globalGuild = '350727122320359424'
 
 const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
 const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
@@ -38,11 +39,11 @@ const event = require('./ordis_modules/Discord/event')
 bot.on('ready', () => {
     console.log("je suis connecté")
     //console.log(bot.guilds.cache)
-    bot.user.setActivity("Initialisation", { type: "WATCHING" })
+    bot.user.setActivity("Initialisation", { type: Discord.ActivityType.Custom })
     setInterval(cetusState, 60000)
-    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 30000)
-    setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 60000)
-    event.getEmbededMessages(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "events"))
+    setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
+    setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 300000)
+    //event.getEmbededMessages(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "events"))
 })
 
 function cetusState() {
@@ -54,49 +55,19 @@ function cetusState() {
             } else {
                 message += `🌑:  ${(response.data.timeLeft.includes("m") ? response.data.timeLeft.match(/((\d*h )*(\d*m)*)/)[0] : response.data.timeLeft)}`
             }
-            bot.user.setActivity(message, { type: "WATCHING" })
+            bot.user.setActivity(message, { type: Discord.ActivityType.Custom })
         }).catch((err) => {
             console.error("err dans cetusState => " + err.message)
         })
 }
 
 
-
-// bot.on('message', message => {
-//     console.log(message)
-//     if (message.content.toLowerCase().startsWith('salut ordis')) {
-//         message.reply("Salut cher ami")
-//     }
-
-
-//     if (message.content.startsWith(prefixWarframe) && !message.author.bot) {
-
-//         const warframeArgs = message.content.slice(1).split(/ +/)
-//         const warframeCommandName = warframeArgs.shift().toLowerCase()
-//         //------------------------
-//         // console.log("Warframe")
-//         // console.log(warframeCommandName)
-//         // console.log(warframeArgs)
-//         //------------------------
-//         if (!bot.commands.has(warframeCommandName)) return
-
-//         const warframeCommand = bot.commands.get(warframeCommandName.toLowerCase())
-
-//         try {
-//             warframeCommand.execute(message, warframeArgs)
-//         } catch {
-//             message.reply("Error")
-//         }
-//     }
-
-// })
-
-bot.on('interaction', async interaction => {
+bot.on(Discord.Events.InteractionCreate, async interaction => {
     // If the interaction isn't a slash command, return
     if (!interaction.isCommand()) return;
     console.log(interaction)
     if (interaction.commandName != "clear") {
-        await interaction.defer()
+        await interaction.deferReply()
     }
     try {
         bot.commands.get(interaction.commandName).execute(interaction)
@@ -105,41 +76,41 @@ bot.on('interaction', async interaction => {
     }
 })
 
-//PB DE CACHE
-bot.on('raw', event => {
-    var eventName = event.t
-    //console.log(event)
-    if (eventName == 'MESSAGE_REACTION_ADD') {
-        if (event.d.channel_id === '616684719710404645') {
-            console.log(bot.channels.cache.get(event.d.channel_id).messages)
-            if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
-                return
-            } else {
-                bot.channels.cache.get(event.d.channel_id).messages.fetch(event.d.message_id)
-                    .then(msg => {
-                        var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-                        var user = bot.users.get(event.d.user_id)
-                        bot.emit('messageReactionAdd', msgReaction, user)
-                    })
-            }
-        }
-    }
+// //PB DE CACHE
+// bot.on('raw', event => {
+//     var eventName = event.t
+//     //console.log(event)
+//     if (eventName == 'MESSAGE_REACTION_ADD') {
+//         if (event.d.channel_id === '616684719710404645') {
+//             console.log(bot.channels.cache.get(event.d.channel_id).messages)
+//             if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
+//                 return
+//             } else {
+//                 bot.channels.cache.get(event.d.channel_id).messages.fetch(event.d.message_id)
+//                     .then(msg => {
+//                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+//                         var user = bot.users.get(event.d.user_id)
+//                         bot.emit('messageReactionAdd', msgReaction, user)
+//                     })
+//             }
+//         }
+//     }
 
-    if (eventName == 'MESSAGE_REACTION_REMOVE') {
-        if (event.d.channel_id === '616684719710404645') {
-            if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
-                return
-            } else {
-                bot.channels.cache.get(event.d.channel_id).messages.cache.fetch(event.d.message_id)
-                    .then(msg => {
-                        var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-                        var user = bot.users.get(event.d.user_id)
-                        bot.emit('messageReactionRemove', msgReaction, user)
-                    })
-            }
-        }
-    }
-})
+//     if (eventName == 'MESSAGE_REACTION_REMOVE') {
+//         if (event.d.channel_id === '616684719710404645') {
+//             if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
+//                 return
+//             } else {
+//                 bot.channels.cache.get(event.d.channel_id).messages.cache.fetch(event.d.message_id)
+//                     .then(msg => {
+//                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+//                         var user = bot.users.get(event.d.user_id)
+//                         bot.emit('messageReactionRemove', msgReaction, user)
+//                     })
+//             }
+//         }
+//     }
+// })
 
 bot.on('voiceStateUpdate', async (oldState, newState) => {
     //console.log(oldState)
@@ -147,8 +118,8 @@ bot.on('voiceStateUpdate', async (oldState, newState) => {
         console.log("channel not null")
         if (newState.channel.name == "Creation de salon") {
             console.log("channel name is 'Creation de salon'")
-            newState.guild.channels.create(newState.member.user.username, {
-                type: "voice",
+            newState.guild.channels.create({
+                name: newState.member.user.username, type: Discord.ChannelType.GuildVoice,
             }).then(newVocalChannel => {
                 console.log("vocal created")
                 newVocalChannel.setParent(newState.guild.channels.cache.find(channel => channel.name == "Creation de salon").parent)

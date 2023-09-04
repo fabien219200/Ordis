@@ -9,19 +9,19 @@ module.exports = {
             .then((response) => {
                 var chaine = response.data.shortString.split(" ")
                 if (response.data.isDay == true) {
-                    let embed = new Discord.MessageEmbed()
+                    let embed = new Discord.EmbedBuilder()
                         .setTitle("Cycle Cetus : **Jour**")
                         .setColor("#ffe387")
                         .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/3/32/OstronSyndicateFlag.png/revision/latest?cb=20171017012540")
-                        .addField("Il fait actuellement jour sur Cetus.", "Temps restant : " + chaine[0] + ".")
-                    interaction.editReply(embed)
+                        .addFields({name: "Il fait actuellement jour sur Cetus.", value: `Temps restant : ${chaine[0]}.`})
+                    interaction.editReply({embeds: [embed]})
                 } else {
-                    let embed = new Discord.MessageEmbed()
+                    let embed = new Discord.EmbedBuilder()
                         .setTitle("Cycle Cetus : **Nuit**")
                         .setColor("#0c0963")
                         .setThumbnail("https://vignette.wikia.nocookie.net/warframe/images/3/32/OstronSyndicateFlag.png/revision/latest?cb=20171017012540")
-                        .addField("Il fait actuellement nuit sur Cetus", "Temps restant : " + chaine[0] + ".")
-                    interaction.editReply(embed)
+                        .addFields({name: "Il fait actuellement nuit sur Cetus.", value: `Temps restant : ${chaine[0]}.`})
+                    interaction.editReply({embeds: [embed]})
                 }
             }).catch(function (err) {
                 interaction.editReply(`Une erreur est survenue pour la raison suivante : \n\`\`\`${err}\`\`\``)

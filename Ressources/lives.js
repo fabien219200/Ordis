@@ -30,7 +30,7 @@ module.exports.checkLive = async function (channel) {
             if (response.data.data.length != 0) {
                 if (new Date(response.data.data[0].started_at).valueOf() != lastStreamDate) {
                     lastStreamDate = response.data.data[0].started_at
-                    var embed = new Discord.MessageEmbed()
+                    var embed = new Discord.EmbedBuilder()
                         .setTitle('**' + response.data.data[0].user_name + ' est en stream :**')
                         .setDescription('***' + response.data.data[0].title + '***')
                         .setFooter('N\'oubliez pas de recuperer le twitch drop en regardant 30min du live.')
@@ -38,7 +38,7 @@ module.exports.checkLive = async function (channel) {
                         .setURL('https://www.twitch.tv/warframe')
                         .setColor('ba59ff')
                         .setImage(response.data.data[0].thumbnail_url)
-                    channel.send(embed)
+                    channel.send({embeds: [embed]})
                 }
             }
         }).catch(err => {
