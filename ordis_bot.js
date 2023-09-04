@@ -1,26 +1,35 @@
-const Discord = require('discord.js')
 
+// Import required dependencies
+const Discord = require('discord.js')
+const axios = require('axios')
+const fs = require('fs')
+
+// Load environment variables
+require('dotenv').config()
+
+
+// Create a new Discord client instance
 const bot = new Discord.Client({
     intents: [
+        // Specify the bot's intents to listen for
         Discord.GatewayIntentBits.Guilds,
         Discord.GatewayIntentBits.GuildMessages,
         Discord.GatewayIntentBits.GuildMessageReactions,
-        Discord.GatewayIntentBits.GuildVoiceStates,        
-        Discord.GatewayIntentBits.GuildPresences,        
+        Discord.GatewayIntentBits.GuildVoiceStates,
+        Discord.GatewayIntentBits.GuildPresences,
     ]
 })
 
-
-const axios = require('axios')
-const fs = require('fs')
-require('dotenv').config()
-
+// Create a collection to store bot commands
 bot.commands = new Discord.Collection();
+// Define a global guild ID
 globalGuild = '350727122320359424'
 
+// Load Discord and Warframe commands from their respective directories
 const discordCommands = fs.readdirSync('./ordis_modules/Discord').filter(file => file.endsWith('.js'))
 const warframeCommands = fs.readdirSync('./ordis_modules/Warframe').filter(file => file.endsWith('.js'))
 
+// Add loaded commands to the bot.commands collection
 for (const file of discordCommands) {
     const command = require(`./ordis_modules/Discord/${file}`);
     bot.commands.set(command.name.toLowerCase(), command);
@@ -31,21 +40,27 @@ for (const file of warframeCommands) {
     bot.commands.set(command.name.toLowerCase(), command);
 }
 
+// Load custom required modules
 const rss = require('./Ressources/rss')
 const lives = require('./Ressources/lives')
 const event = require('./ordis_modules/Discord/event')
 
 
+// Handle 'ready' event
 bot.on('ready', () => {
     console.log("je suis connecté")
     //console.log(bot.guilds.cache)
     bot.user.setActivity("Initialisation", { type: Discord.ActivityType.Custom })
+
+    // Set up periodic actions using intervals
     setInterval(cetusState, 60000)
     setInterval(function () { rss.rssFeed(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "patch-notes")) }, 300000)
     setInterval(function () { lives.checkLive(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "lives")) }, 300000)
-    //event.getEmbededMessages(bot.guilds.cache.find(guild => guild.id == globalGuild).channels.cache.find(channel => channel.name == "events"))
 })
 
+/**
+ * Function to update Cetus cycle state
+ */
 function cetusState() {
     var message = "Cetus => "
     axios.get('https://api.warframestat.us/pc/cetusCycle')
@@ -62,12 +77,12 @@ function cetusState() {
 }
 
 
+// Handle interaction (slash command) creation
 bot.on(Discord.Events.InteractionCreate, async interaction => {
-    // If the interaction isn't a slash command, return
-    if (!interaction.isCommand()) return;
+    if (!interaction.isCommand()) return // Skip if not a slash command
     console.log(interaction)
     if (interaction.commandName != "clear") {
-        await interaction.deferReply()
+        await interaction.deferReply() // Defer reply for non-"clear" commands
     }
     try {
         bot.commands.get(interaction.commandName).execute(interaction)
@@ -76,57 +91,25 @@ bot.on(Discord.Events.InteractionCreate, async interaction => {
     }
 })
 
-// //PB DE CACHE
-// bot.on('raw', event => {
-//     var eventName = event.t
-//     //console.log(event)
-//     if (eventName == 'MESSAGE_REACTION_ADD') {
-//         if (event.d.channel_id === '616684719710404645') {
-//             console.log(bot.channels.cache.get(event.d.channel_id).messages)
-//             if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
-//                 return
-//             } else {
-//                 bot.channels.cache.get(event.d.channel_id).messages.fetch(event.d.message_id)
-//                     .then(msg => {
-//                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-//                         var user = bot.users.get(event.d.user_id)
-//                         bot.emit('messageReactionAdd', msgReaction, user)
-//                     })
-//             }
-//         }
-//     }
 
-//     if (eventName == 'MESSAGE_REACTION_REMOVE') {
-//         if (event.d.channel_id === '616684719710404645') {
-//             if (bot.channels.cache.get(event.d.channel_id).messages.cache.has(event.d.message_id)) {
-//                 return
-//             } else {
-//                 bot.channels.cache.get(event.d.channel_id).messages.cache.fetch(event.d.message_id)
-//                     .then(msg => {
-//                         var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
-//                         var user = bot.users.get(event.d.user_id)
-//                         bot.emit('messageReactionRemove', msgReaction, user)
-//                     })
-//             }
-//         }
-//     }
-// })
-
-bot.on('voiceStateUpdate', async (oldState, newState) => {
-    //console.log(oldState)
+// Handle voice state updates
+bot.on(Discord.Events.VoiceStateUpdate, async (oldState, newState) => {
+    // Logic for handling voice state updates, such as creating and deleting voice channels
     if (newState.channel != null) {
-        console.log("channel not null")
+        console.log("User joined a channel")
         if (newState.channel.name == "Creation de salon") {
-            console.log("channel name is 'Creation de salon'")
+            console.log("User joined channel named 'Creation de salon'")
+            // Create a new voice channel with the user's name and set it as their destination
             newState.guild.channels.create({
-                name: newState.member.user.username, type: Discord.ChannelType.GuildVoice,
+                name: newState.member.user.username,
+                type: Discord.ChannelType.GuildVoice,
             }).then(newVocalChannel => {
-                console.log("vocal created")
+                console.log("Voice channel created")
                 newVocalChannel.setParent(newState.guild.channels.cache.find(channel => channel.name == "Creation de salon").parent)
                     .then(() => {
-                        console.log("parent set")
+                        console.log("Parent set")
                         newState.member.edit({ channel: newVocalChannel })
-                        console.log("user state set")
+                        console.log("User state set")
                     }).catch(e => {
                         console.log(e)
                     })
@@ -138,13 +121,14 @@ bot.on('voiceStateUpdate', async (oldState, newState) => {
 
     if (oldState.channel != null) {
         if (oldState.channel.name != "Creation de salon" && oldState.channel.members.size == 0) {
-            oldState.channel.delete()
+            oldState.channel.delete(); // Delete the channel if empty and not named "Creation de salon"
         }
     }
-})
+});
 
 
-bot.on('messageReactionAdd', (reaction, user) => {
+// Handle message reaction addition
+bot.on(Discord.Events.MessageReactionAdd, (reaction, user) => {
     console.log("Add role initiated !")
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
@@ -160,7 +144,9 @@ bot.on('messageReactionAdd', (reaction, user) => {
     }
 })
 
-bot.on('messageReactionRemove', (reaction, user) => {
+
+// Handle message reaction removal
+bot.on(Discord.Events.MessageReactionRemove, (reaction, user) => {
     var roleName = reaction.emoji.name
     var role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
     if (role) {
@@ -171,18 +157,22 @@ bot.on('messageReactionRemove', (reaction, user) => {
     }
 })
 
-bot.on("guildMemberRemove", member => {
-    member.guild.channels.cache.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
-})
 
+// Handle guild member departure
+// bot.on(Discord.Events.GuildMemberRemove, member => {
+//     //Send a farewell message when a member leaves the guild
+//     member.guild.channels.cache.find("name", "bienvenue").send(member + " vient de quitter le serveur :cry:. On ne l'oubliera jamais !\nIl etait un précieux partenaire :heart: !")
+// })
+
+
+// Log in the bot using the provided token from environment variables
 bot.login(process.env.BOT_TOKEN)
 
 /**
- * Returns the message with an uppercase at the beginning of each word.
- * 
- * @param {string} string The original string.
- * @param  {string} joiner The string used to join each word of the original string.
- * @returns {string} The message with an uppercase to each word.
+ * Utility function to capitalize the first letter of each word in a string.
+ * @param {string} string - The original string.
+ * @param {string} joiner - The string used to join each word.
+ * @returns {string} - The modified string with capitalized words.
  */
 module.exports.majuscule = function (string, joiner) {
     var words = string.split(" ")
